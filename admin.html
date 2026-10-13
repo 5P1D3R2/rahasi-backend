@@ -52,25 +52,22 @@ button{font-family:system-ui;cursor:pointer}
 .toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#17243C;border:1px solid var(--line2);color:#fff;font:600 12.5px system-ui;padding:11px 16px;border-radius:10px;z-index:99;max-width:88vw;text-align:center}
 .spin{width:14px;height:14px;border:2px solid var(--line2);border-top-color:var(--acc);border-radius:50%;animation:rot .7s linear infinite;display:inline-block}
 @keyframes rot{to{transform:rotate(360deg)}}
-/* key gate */
 #gate{max-width:380px;margin:12vh auto;padding:0 16px}
 #gate .card{padding:22px}
 </style>
 </head>
 <body>
 
-<!-- KEY GATE -->
 <div id="gate">
   <div class="card">
     <h2>🔐 Rahisi Admin</h2>
-    <p style="font-size:13px;color:var(--mut);margin:0 0 12px">Owner access only. Enter your ADMIN_KEY (the one set in Render's environment variables). It stays on this device.</p>
+    <p style="font-size:13px;color:var(--mut);margin:0 0 12px">Owner access only. Enter your ADMIN_KEY (set in Render's environment variables). It stays on this device.</p>
     <div class="fld"><input id="keyIn" type="password" placeholder="ADMIN_KEY" autocomplete="off"></div>
     <div style="color:var(--red);font-size:12px;min-height:16px;margin:-4px 0 8px" id="gateErr"></div>
     <button class="btn" style="width:100%;padding:13px" onclick="unlock()">Unlock panel</button>
   </div>
 </div>
 
-<!-- APP -->
 <div id="app" hidden>
 <header>
   <div class="brand">Rahisi<span>·</span>Admin</div>
@@ -85,13 +82,13 @@ button{font-family:system-ui;cursor:pointer}
     <button data-t="dash" class="on">📊 Dashboard</button>
     <button data-t="reqs">🧾 Requests</button>
     <button data-t="wds">💸 Withdrawals</button>
+    <button data-t="deps">💰 Deposits</button>
     <button data-t="promos">🎟️ Offers</button>
     <button data-t="tools">🛠️ Tools</button>
   </div>
 
-  <!-- DASHBOARD -->
   <section id="s-dash">
-    <div class="grid4" id="statCards">
+    <div class="grid4">
       <div class="stat"><b id="stUsers">—</b><span>USERS</span></div>
       <div class="stat"><b id="stVer">—</b><span>VERIFIED</span></div>
       <div class="stat gd"><b id="stRev">—</b><span>REVENUE KSh</span></div>
@@ -101,6 +98,7 @@ button{font-family:system-ui;cursor:pointer}
       <h2>⚡ Needs your attention</h2>
       <div class="trow"><span>Pending withdrawals <small>pay within 24h — your promise</small></span><b id="atWd">—</b></div>
       <div class="trow"><span>New service requests <small>confirm & start these</small></span><b id="atRq">—</b></div>
+      <div class="trow"><span>Pending STK deposits <small>missed webhooks — verify then approve</small></span><b id="atDeps">—</b></div>
       <div class="trow"><span>Wallet status <small>flips live when TinyPesa key is added</small></span><b id="atWal">—</b></div>
     </div>
     <div class="card">
@@ -108,29 +106,42 @@ button{font-family:system-ui;cursor:pointer}
       <div class="fld"><textarea id="bannerIn" rows="2" maxlength="200" placeholder="e.g. 🎉 OFFER: 20% off all KRA services this week — code KRA20"></textarea></div>
       <button class="btn" id="bannerGo">Save banner</button>
       <button class="btn ghost" id="bannerClr">Clear</button>
-      <p class="note">Shows in the gold strip at the top of your site. Every visitor sees it instantly — your offers board.</p>
+      <p class="note">Shows in the gold strip at the top of your site, visible to every visitor instantly.</p>
     </div>
   </section>
 
-  <!-- REQUESTS -->
   <section id="s-reqs" hidden>
     <div class="card">
       <h2>🧾 Service requests (latest 100)</h2>
       <div id="reqList"><div class="empty">Loading…</div></div>
-      <p class="note">"Refund" credits the customer's wallet instantly and marks the receipt refunded. For customers who paid by direct M-Pesa (WhatsApp flow), refund manually on M-Pesa — those aren't in this list.</p>
+      <p class="note">"Refund" credits the customer's wallet instantly and marks the receipt refunded. Direct-M-Pesa customers (WhatsApp flow) are refunded manually on M-Pesa — they're not in this list.</p>
     </div>
   </section>
 
-  <!-- WITHDRAWALS -->
   <section id="s-wds" hidden>
     <div class="card">
       <h2>💸 Pending withdrawals</h2>
       <div id="wdList"><div class="empty">Loading…</div></div>
-      <p class="note">Send the M-Pesa to the number shown from YOUR wallet, then tap "Mark paid". Always honor within 24 hours — this is the promise that makes the wallet trustworthy.</p>
+      <p class="note">Send the M-Pesa from YOUR wallet to the number shown, THEN tap "Mark paid". Always within 24 hours — this is the promise that makes the wallet trustworthy.</p>
     </div>
   </section>
 
-  <!-- PROMOS -->
+  <section id="s-deps" hidden>
+    <div class="card">
+      <h2>⏳ Pending STK deposits</h2>
+      <p class="note">If a customer entered their PIN but the balance didn't update, the webhook may have been missed. Verify the payment in YOUR M-Pesa statement first, then approve.</p>
+      <div id="pendList"><div class="empty">Loading…</div></div>
+    </div>
+    <div class="card">
+      <h2>➕ Fund a wallet manually</h2>
+      <p class="note">For direct M-Pesa send-money payments (the WhatsApp flow). <b>Only credit AFTER you see the M-Pesa confirmation on your phone.</b> Crediting without payment = giving away money.</p>
+      <div class="fld"><label>Customer phone (must be registered)</label><input id="mfPhone" inputmode="tel" placeholder="07XX XXX XXX"></div>
+      <div class="fld"><label>Amount (KSh)</label><input id="mfAmt" type="number" min="10"></div>
+      <div class="fld"><label>M-Pesa receipt code (from your SMS)</label><input id="mfRef" placeholder="e.g. SGH4KL8P2X" style="text-transform:uppercase"></div>
+      <button class="btn" id="mfGo">Credit wallet</button>
+    </div>
+  </section>
+
   <section id="s-promos" hidden>
     <div class="card">
       <h2>🎟️ Create an offer code</h2>
@@ -150,7 +161,6 @@ button{font-family:system-ui;cursor:pointer}
     </div>
   </section>
 
-  <!-- TOOLS -->
   <section id="s-tools" hidden>
     <div class="card">
       <h2>↩️ Refund by receipt ID</h2>
@@ -201,10 +211,9 @@ async function unlock(){
 }
  $('#keyIn').addEventListener('keydown',e=>{if(e.key==='Enter')unlock()});
 
-/* tabs */
 document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('#tabs button').forEach(x=>x.classList.toggle('on',x===b));
-  ['dash','reqs','wds','promos','tools'].forEach(t=>$('#s-'+t).hidden=t!==b.dataset.t);
+  ['dash','reqs','wds','deps','promos','tools'].forEach(t=>$('#s-'+t).hidden=t!==b.dataset.t);
 });
 
 async function loadAll(){
@@ -218,14 +227,15 @@ async function loadAll(){
     $('#atWd').className=o.pendingWithdrawals.length?'r':'g';
     $('#atRq').textContent=o.newRequests.length;
     $('#atRq').className=o.newRequests.length?'y':'g';
+    $('#atDeps').textContent=o.pendingDeposits||0;
+    $('#atDeps').className=(o.pendingDeposits||0)>0?'y':'g';
     $('#atWal').textContent=o.walletEnabled?'LIVE':'waiting for TinyPesa key';
     $('#atWal').className=o.walletEnabled?'g':'y';
     renderWds(o.pendingWithdrawals);
   }catch(e){toast(e.message)}
-  loadReqs();loadPromos();
+  loadReqs();loadPromos();loadPendingDeps();
 }
 
-/* requests */
 async function loadReqs(){
   const el=$('#reqList');
   try{
@@ -254,7 +264,6 @@ async function refund(rid){
   catch(e){toast(e.message)}
 }
 
-/* withdrawals */
 function renderWds(ws){
   const el=$('#wdList');
   el.innerHTML=ws.length?ws.map(w=>`
@@ -269,7 +278,32 @@ async function markPaid(wid,phone,amount){
   catch(e){toast(e.message)}
 }
 
-/* promos */
+async function loadPendingDeps(){
+  const el=$('#pendList');
+  try{
+    const ds=await call('/admin/deposits/pending');
+    el.innerHTML=ds.length?ds.map(d=>`
+      <div class="trow">
+        <span style="flex:1"><b>KSh ${d.amount}</b> → <span class="mono">${d.phone}</span><small class="mono">${d.id} · ${fmtT(d.t)}</small></span>
+        <button class="btn sm gold" onclick="approveDep('${d.id}')">Approve</button>
+      </div>`).join(''):'<div class="empty">No pending STK deposits 👌</div>';
+  }catch(e){el.innerHTML='<div class="empty">'+e.message+'</div>'}
+}
+async function approveDep(did){
+  if(!confirm('Confirm the customer PAID this deposit (checked in your M-Pesa statement)?\n\nCrediting without payment = giving away money.'))return;
+  try{const d=await call('/admin/deposit/'+did+'/approve',{method:'POST'});toast(d.message);loadPendingDeps();loadAll()}
+  catch(e){toast(e.message)}
+}
+ $('#mfGo').onclick=async()=>{
+  const phone=$('#mfPhone').value.trim(),amount=+$('#mfAmt').value,ref=$('#mfRef').value.trim();
+  if(!phone||!(amount>=10))return toast('Fill phone and amount (min KSh 10)');
+  if(!confirm('Credit KSh '+amount+' to '+phone+'?\n\nOnly if the payment is visible in your M-Pesa. Reference: '+(ref||'none')))return;
+  try{
+    const d=await call('/admin/deposit/manual',{method:'POST',body:JSON.stringify({phone,amount,ref})});
+    toast(d.message);$('#mfPhone').value='';$('#mfAmt').value='';$('#mfRef').value='';loadAll();
+  }catch(e){toast(e.message)}
+};
+
 async function loadPromos(){
   const el=$('#promoList');
   try{
@@ -296,7 +330,6 @@ async function disablePromo(code){
   catch(e){toast(e.message)}
 }
 
-/* banner */
  $('#bannerGo').onclick=async()=>{
   try{await call('/admin/banner',{method:'POST',body:JSON.stringify({text:$('#bannerIn').value})});toast('Banner saved — live on the site now 📢')}
   catch(e){toast(e.message)}
@@ -306,7 +339,14 @@ async function disablePromo(code){
   catch(e){toast(e.message)}
 };
 
-/* export */
+ $('#refGo').onclick=async()=>{
+  const rid=$('#refId').value.trim();
+  if(!rid)return toast('Enter a receipt ID');
+  if(!confirm('Refund '+rid+' to the customer wallet?'))return;
+  try{const d=await call('/admin/refund',{method:'POST',body:JSON.stringify({rid})});toast(d.message);$('#refId').value='';loadReqs()}
+  catch(e){toast(e.message)}
+};
+
  $('#expGo').onclick=async()=>{
   try{
     const r=await fetch(API+'/admin/export',{headers:{'x-admin-key':KEY}});
@@ -320,7 +360,6 @@ async function disablePromo(code){
   }catch(e){toast(e.message)}
 };
 
-/* boot: auto-unlock if key remembered */
 if(KEY){$('#keyIn').value=KEY;unlock();}
 </script>
 </body>
