@@ -2,27 +2,50 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const crypto = require('crypto');
-const fs = require('fs');
-const path = require('path');
+const { Pool } = require('pg');
 
 const app = express();
 app.use(cors());
 app.use(express.json({ limit: '5mb' }));
 app.use(express.urlencoded({ extended: false }));
 
-/* ── JSON file database. Back up weekly; restore after redeploys. ── */
-const DB_FILE = path.join(__dirname, 'db.json');
-let db;
-try { db = JSON.parse(fs.readFileSync(DB_FILE, 'utf8')); }
-catch {
-  db = { users: [], sessions: [], ledger: [], deposits: [], withdrawals: [],
-         requests: [], ratings: [], promos: [], settings: { banner: '' } };
+/* ═══ PERSISTENT STORAGE — Neon Postgres (free) — survives redeploys ═══
+   Set DATABASE_URL in Render env vars. Whole app state lives as one JSONB
+   document; app logic below is untouched. */
+const pool = new Pool({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } });
+const EMPTY = { users: [], sessions: [], ledger: [], deposits: [], withdrawals: [],
+                requests: [], ratings: [], promos: [], settings: { banner: '' } };
+let db = JSON.parse(JSON.stringify(EMPTY));
+
+async function loadDb() {
+  try {
+    await pool.query('CREATE TABLE IF NOT EXISTS app_state (id INT PRIMARY KEY, data JSONB)');
+    const r = await pool.query('SELECT data FROM app_state WHERE id = 1');
+    if (r.rows.length && r.rows[0].data) {
+      db = { ...JSON.parse(JSON.stringify(EMPTY)), ...r.rows[0].data };
+      console.log('DB loaded from Postgres:', db.users.length, 'users,', db.sessions.length, 'sessions');
+    } else {
+      await pool.query('INSERT INTO app_state (id, data) VALUES (1, $1)', [JSON.stringify(db)]);
+      console.log('Fresh DB created in Postgres');
+    }
+  } catch (e) {
+    console.error('DB LOAD FAILED:', e.message);
+  }
 }
+
 let saveT = null;
 function save() {
   clearTimeout(saveT);
-  saveT = setTimeout(() => { try { fs.writeFileSync(DB_FILE, JSON.stringify(db)); } catch (e) { console.error(e); } }, 150);
+  saveT = setTimeout(async () => {
+    try {
+      await pool.query(
+        'INSERT INTO app_state (id, data) VALUES (1, $1) ON CONFLICT (id) DO UPDATE SET data = $1',
+        [JSON.stringify(db)]
+      );
+    } catch (e) { console.error('DB SAVE FAILED:', e.message); }
+  }, 300);
 }
+
 const newId = () => crypto.randomBytes(6).toString('hex').toUpperCase();
 
 /* ── config ── */
@@ -118,8 +141,8 @@ app.post('/auth/delete', auth, (req, res) => {
 });
 
 /* ═══ DEPOSITS (TinyPesa STK push) ═══
-   If TinyPesa requires your dashboard target as account_no, set env var
-   TINYPESA_TARGET = Amspider in Render. Leave unset to use the deposit ID. */
+   If TinyPesa requires your dashboard link-name as account_no, set env var
+   TINYPESA_TARGET in Render. Leave unset to use the deposit ID. */
 app.post('/wallet/deposit', auth, async (req, res) => {
   if (!WALLET_ENABLED) return res.status(403).json({ error: 'Wallet is not enabled yet' });
   const amount = Math.floor(+req.body.amount);
@@ -140,8 +163,10 @@ app.post('/wallet/deposit', auth, async (req, res) => {
     try { data = JSON.parse(raw); } catch { data = { success: false }; }
     if (!data.success) {
       dep.status = 'failed'; dep.lastError = raw.slice(0, 200); save();
-      const hint = /kyc|verif|pend/i.test(raw) ? ' — TinyPesa KYC appears not approved yet' : '';
-      return res.status(400).json({ error: 'TinyPesa rejected the push' + hint + '. Says: ' + raw.slice(0, 120) });
+      const html = raw.trim().toLowerCase().startsWith('<!doctype');
+      const hint = html ? ' — TinyPesa served a web page instead of the API. Usually means the API endpoint has changed or the account/key is not active.'
+                  : /kyc|verif|pend/i.test(raw) ? ' — KYC not approved yet.' : '';
+      return res.status(400).json({ error: 'TinyPesa rejected the push' + hint });
     }
     dep.tracking = data.tracking_id; save();
     res.json({ depositId: dep.id, status: 'pending', message: 'Enter your M-Pesa PIN on the prompt sent to ' + dep.phone });
@@ -374,5 +399,9 @@ app.get('/admin/export', (req, res) => {
 });
 
 app.get('/', (req, res) => res.send('Rahisi backend running' + (WALLET_ENABLED ? ' (wallet LIVE)' : ' (wallet waiting for TinyPesa key)')));
+
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log('Rahisi backend on ' + PORT, WALLET_ENABLED ? '(LIVE)' : '(wallet disabled — add TINYPESA_API_KEY when KYC clears)'));
+(async () => {
+  await loadDb();
+  app.listen(PORT, () => console.log('Rahisi backend on ' + PORT, WALLET_ENABLED ? '(LIVE)' : '(wallet disabled — add TINYPESA_API_KEY when KYC clears)'));
+})();
