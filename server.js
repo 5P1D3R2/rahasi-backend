@@ -238,6 +238,10 @@ app.get('/admin/overview', (req, res) => {
     depositsToday: db.deposits.filter(d => d.status === 'paid' && Date.now() - d.t < 864e5).length
   });
 });
+app.get('/admin/requests', (req, res) => {
+  if (!isAdmin(req)) return res.status(401).json({ error: 'bad key' });
+  res.json(db.requests.slice(-100).reverse());
+});
 app.post('/admin/withdrawal/:wid/paid', (req, res) => {
   if (!isAdmin(req)) return res.status(401).json({ error: 'bad key' });
   const w = db.withdrawals.find(x => x.id === req.params.wid);
@@ -261,6 +265,7 @@ app.post('/admin/refund', (req, res) => {
   r.status = 'refunded'; save();
   res.json({ ok: true, message: 'Refunded KSh ' + (r.final || r.price) + ' to wallet' });
 });
+/* promo codes */
 app.post('/admin/promo', (req, res) => {
   if (!isAdmin(req)) return res.status(401).json({ error: 'bad key' });
   const code = String(req.body.code || '').trim().toUpperCase().replace(/[^A-Z0-9]/g, '');
@@ -288,14 +293,42 @@ app.post('/admin/banner', (req, res) => {
   db.settings.banner = String(req.body.text || '').slice(0, 200); save();
   res.json({ banner: db.settings.banner });
 });
+
+/* ═══ ADMIN — wallet deposits: approve STK or credit manually ═══ */
+app.get('/admin/deposits/pending', (req, res) => {
+  if (!isAdmin(req)) return res.status(401).json({ error: 'bad key' });
+  res.json(db.deposits.filter(d => d.status === 'pending').slice(-50).reverse());
+});
+app.post('/admin/deposit/:did/approve', (req, res) => {
+  if (!isAdmin(req)) return res.status(401).json({ error: 'bad key' });
+  const dep = db.deposits.find(d => d.id === req.params.did.toUpperCase());
+  if (!dep) return res.status(404).json({ error: 'not found' });
+  if (dep.status !== 'pending') return res.status(400).json({ error: 'not pending' });
+  dep.status = 'paid'; dep.ref = dep.ref || 'MANUAL-' + Date.now();
+  addLedger(dep.phone, dep.amount, 'deposit', dep.ref);
+  const u = userByPhone(dep.phone); if (u) u.verified = true;
+  save();
+  res.json({ ok: true, message: 'Credited KSh ' + dep.amount + ' to ' + dep.phone });
+});
+app.post('/admin/deposit/manual', (req, res) => {
+  if (!isAdmin(req)) return res.status(401).json({ error: 'bad key' });
+  const phone = normPhone(req.body.phone);
+  const amount = Math.floor(+req.body.amount);
+  const ref = String(req.body.ref || '').trim().slice(0, 40);
+  if (!phone) return res.status(400).json({ error: 'Invalid phone number' });
+  if (!(amount >= 10)) return res.status(400).json({ error: 'Minimum is KSh 10' });
+  const u = userByPhone(phone);
+  if (!u) return res.status(404).json({ error: 'No account with that phone — customer must register first' });
+  addLedger(phone, amount, 'deposit', ref || 'manual');
+  u.verified = true;
+  save();
+  console.log('MANUAL DEPOSIT:', phone, amount, ref);
+  res.json({ ok: true, message: 'Credited KSh ' + amount + ' to ' + phone });
+});
 app.get('/admin/export', (req, res) => {
   if (!isAdmin(req)) return res.status(401).json({ error: 'bad key' });
   res.setHeader('Content-Disposition', 'attachment; filename="rahasi-backup.json"');
   res.json(db);
-});
-app.get('/admin/requests', (req, res) => {
-  if (!isAdmin(req)) return res.status(401).json({ error: 'bad key' });
-  res.json(db.requests.slice(-100).reverse());
 });
 
 app.get('/', (req, res) => res.send('Rahisi backend running' + (WALLET_ENABLED ? ' (wallet LIVE)' : ' (wallet waiting for TinyPesa key)')));
