@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rahisi Services · 140+ govt & digital services, done for you</title>
+<meta name="description" content="KRA, SHA, eCitizen, HELB, NTSA & 140+ services done for you via WhatsApp or wallet. Receipts for every payment. Instant refunds.">
+<meta name="theme-color" content="#0A1120">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%230B1220'/><circle cx='12' cy='12' r='7' fill='none' stroke='%232EE58A' stroke-width='2.5'/><circle cx='12' cy='12' r='2.5' fill='%232EE58A'/></svg>">
+<meta property="og:title" content="Rahisi Services — Government paperwork, done for you">
+<meta property="og:description" content="KRA, SHA, HELB, eCitizen, NTSA + 140 services. Pay by M-Pesa or wallet, get a receipt ID, track progress.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="YOUR_SITE_URL">
+<style>
+:root{
+  --bg:#0A1120; --panel:#111C2E; --panel2:#17243C; --line:#1F2E4A; --line2:#2C3F63;
+  --text:#EAF1FB; --mut:#94A6C3; --dim:#5E7191;
+  --acc:#2EE58A; --wa:#25D366; --tg:#2AABEE; --gold:#FBBF24; --red:#FB7185;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:400 15px/1.55 system-ui,sans-serif;padding-bottom:76px}
+.mono{font-family:ui-monospace,Menlo,Consolas,monospace}
+a{color:inherit}
+header{display:flex;align-items:center;gap:8px;padding:10px 12px;background:rgba(10,17,32,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:40}
+.icbtn{width:38px;height:38px;border-radius:11px;background:var(--panel2);border:1px solid var(--line2);color:var(--text);font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex:none}
+.icbtn:active{transform:scale(.94)}
+.brand{font-weight:800;font-size:16.5px;flex:1;min-width:0;white-space:nowrap;overflow:hidden}
+.brand span{color:var(--acc)}
+.avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#2EE58A,#A78BFA);color:#04231A;font:800 15px system-ui;display:flex;align-items:center;justify-content:center;border:0;cursor:pointer;flex:none}
+.avatar.g{background:var(--panel2);color:var(--mut);border:1px solid var(--line2)}
+.veil{position:fixed;inset:0;background:rgba(3,7,15,.65);opacity:0;pointer-events:none;transition:.22s;z-index:44}
+.veil.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;bottom:0;left:0;width:min(310px,86vw);background:var(--panel);border-right:1px solid var(--line2);z-index:50;transform:translateX(-104%);transition:.24s;overflow:auto;padding:14px}
+.drawer.on{transform:none}
+.drawer .dhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.dprof{background:var(--panel2);border:1px solid var(--line2);border-radius:14px;padding:13px;margin-bottom:12px}
+.dprof .nm{font-weight:800;font-size:14.5px}
+.dprof .ph{font-size:12px;color:var(--mut);font-family:ui-monospace,monospace}
+.dprof .bl{font:800 22px ui-monospace,monospace;color:var(--acc);margin-top:4px}
+.dit{display:flex;align-items:center;gap:11px;width:100%;padding:12px 11px;border:0;background:none;color:var(--text);font:600 13.5px system-ui;border-radius:11px;cursor:pointer;text-align:left;text-decoration:none}
+.dit:hover,.dit:active{background:var(--panel2)}
+.dit .di{font-size:17px;width:22px;text-align:center;flex:none}
+.dsep{height:1px;background:var(--line);margin:8px 4px}
+.strip{background:rgba(251,191,36,.09);border-bottom:1px solid rgba(251,191,36,.3);color:var(--gold);font-size:12px;padding:7px 14px;text-align:center;line-height:1.5}
+.hero{position:relative;background:radial-gradient(1200px 400px at 80% -10%,rgba(46,229,138,.22),transparent),radial-gradient(900px 400px at 0% 110%,rgba(167,139,250,.18),transparent),linear-gradient(160deg,#0A1B3D,#0E3A5C 60%,#0B5C46);color:#fff;padding:36px 16px 30px}
+.hero .in{max-width:680px;margin:0 auto}
+.hero h1{font-size:26px;line-height:1.22;margin:0 0 9px}
+.hero h1 em{font-style:normal;color:var(--acc)}
+.hero p{margin:0 0 18px;font-size:14.5px;opacity:.93}
+.hbtns{display:flex;gap:9px;flex-wrap:wrap}
+.hbtn{background:#fff;border:0;color:#0A1B3D;font:800 14px system-ui;padding:13px 20px;border-radius:12px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:7px}
+.hbtn.ghost{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.35)}
+.hero .fine{font-size:11.5px;opacity:.82;margin:14px 0 0}
+.stats{display:flex;gap:9px;max-width:680px;margin:-24px auto 0;padding:0 14px;position:relative;z-index:5}
+.stat{flex:1;background:var(--panel);border:1px solid var(--line2);border-radius:14px;padding:11px 8px;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.stat b{display:block;font:800 17px ui-monospace,monospace;color:var(--acc)}
+.stat span{font:600 10px system-ui;color:var(--mut)}
+main{max-width:680px;margin:0 auto;padding:16px 14px 30px}
+.stickywrap{position:sticky;top:59px;background:var(--bg);z-index:30;padding:10px 0 4px;border-bottom:1px solid var(--line);margin-bottom:12px}
+.search{position:relative}
+.search input{width:100%;font:600 15px system-ui;color:var(--text);background:var(--panel);border:1px solid var(--line2);border-radius:13px;padding:13px 42px 13px 44px;outline:0;-webkit-appearance:none}
+.search input:focus{border-color:var(--acc);box-shadow:0 0 0 3px rgba(46,229,138,.15)}
+.search .mag{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--dim)}
+.search .clr{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:0;color:var(--dim);font-size:15px;cursor:pointer;padding:6px}
+.sortrow{display:flex;gap:8px;align-items:center;margin-top:8px}
+.sortsel{margin-left:auto;background:var(--panel);border:1px solid var(--line2);color:var(--text);border-radius:9px;font:600 12px system-ui;padding:7px 9px;outline:0}
+.qchips{display:flex;gap:6px;overflow-x:auto;padding:8px 0 4px;scrollbar-width:none}
+.qchips::-webkit-scrollbar{display:none}
+.qchips button{flex:none;padding:6px 12px;border-radius:999px;background:var(--panel2);border:1px solid var(--line);color:var(--mut);font:600 11.5px system-ui;cursor:pointer}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:8px 0 6px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chips button{flex:none;padding:8px 14px;border-radius:999px;border:1px solid var(--line2);background:var(--panel);color:var(--mut);font:700 12.5px system-ui;cursor:pointer}
+.chips button.on{background:var(--acc);border-color:var(--acc);color:#04231A}
+.trust{display:flex;gap:10px;background:linear-gradient(140deg,#12264A,#0E3A35);border:1px solid var(--line2);border-radius:16px;padding:14px;margin:14px 0}
+.trust .ti{font-size:24px}
+.trust b{display:block;font-size:13px}
+.trust p{margin:2px 0 0;font-size:12px;color:var(--mut);line-height:1.55}
+.trust .vbtn{margin-top:8px;background:none;border:1px solid var(--acc);color:var(--acc);border-radius:8px;padding:7px 12px;font:700 11.5px system-ui;cursor:pointer}
+.shead{font:800 13px system-ui;letter-spacing:.08em;color:var(--gold);margin:16px 0 10px;text-transform:uppercase}
+.count{font:600 12px system-ui;color:var(--dim);margin:10px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+.svc{background:var(--panel);border:2px solid var(--line2);border-radius:16px;padding:15px;display:flex;flex-direction:column;gap:6px;transition:border-color .15s,transform .12s}
+.svc:hover{border-color:var(--acc);transform:translateY(-2px)}
+.svc .top{display:flex;justify-content:space-between;align-items:center;gap:6px}
+.svc .ico{font-size:29px}
+.svc .eta{font:700 10px system-ui;background:rgba(46,229,138,.12);color:var(--acc);padding:4px 9px;border-radius:6px;white-space:nowrap}
+.favbtn{background:none;border:0;font-size:16px;cursor:pointer;padding:2px;filter:grayscale(1);opacity:.45}
+.favbtn.on{filter:none;opacity:1}
+.svc b.svcname{font-size:15px;line-height:1.3;cursor:pointer}
+.svc b.svcname:hover{color:var(--acc)}
+.svc .d{font-size:12.5px;color:var(--mut);flex:1}
+.ratebar{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.stars{color:var(--gold);font-size:11.5px;letter-spacing:1px}
+.stars small{color:var(--dim);letter-spacing:0}
+.ratebtn{background:none;border:0;color:var(--dim);font:600 11px system-ui;cursor:pointer;text-decoration:underline;padding:0}
+.svc .row{display:flex;flex-direction:column;gap:9px;margin-top:6px}
+.svc .price{font:800 18px ui-monospace,monospace;color:var(--acc)}
+.svc .go{width:100%;background:var(--acc);color:#04231A;border:0;border-radius:11px;padding:13px;font:800 14px system-ui;cursor:pointer}
+.svc .go:active{transform:scale(.98)}
+.nores{text-align:center;padding:26px 14px;background:var(--panel);border:1px dashed var(--line2);border-radius:16px}
+.nores b{display:block;font-size:15px;margin-bottom:6px}
+.nores p{margin:0 0 14px;font-size:13px;color:var(--mut)}
+.nores button{background:var(--wa);border:0;color:#04231A;border-radius:11px;padding:12px 18px;font:800 13.5px system-ui;cursor:pointer}
+.sec2{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:14px}
+.sec2 h2{font-size:16px;margin:0 0 8px}
+.community{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.community a{display:flex;align-items:center;gap:9px;background:var(--panel2);border:1px solid var(--line2);border-radius:12px;padding:12px;text-decoration:none;font:700 13px system-ui}
+.community .ca{font-size:22px}
+.community small{display:block;font:500 10.5px system-ui;color:var(--mut)}
+.c-wa{border-color:rgba(37,211,102,.45)!important}
+.c-tg{border-color:rgba(42,171,238,.45)!important}
+.refer{background:linear-gradient(140deg,#0E2A4A,#0E5C46);color:#fff;border-radius:16px;padding:17px;margin-top:14px;border:1px solid var(--line2)}
+.refer p{margin:0 0 12px;font-size:13px;opacity:.93;line-height:1.6}
+.refer .rrow{display:flex;gap:8px;flex-wrap:wrap}
+.refer input{flex:1;min-width:150px;font:600 14px system-ui;padding:11px 13px;border-radius:10px;border:0;outline:0}
+.refer button{background:#fff;color:#0A1B3D;border:0;border-radius:10px;padding:11px 16px;font:800 13px system-ui;cursor:pointer}
+.refer .code{display:inline-block;margin-top:10px;background:rgba(255,255,255,.15);border:1px dashed rgba(255,255,255,.5);border-radius:9px;padding:8px 13px;font:700 14px ui-monospace,monospace}
+.steps{counter-reset:s;display:flex;flex-direction:column;gap:9px}
+.step{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px 14px 12px 46px;position:relative;font-size:13.5px}
+.step::before{counter-increment:s;content:counter(s);position:absolute;left:12px;top:12px;width:24px;height:24px;border-radius:50%;background:var(--acc);color:#04231A;display:flex;align-items:center;justify-content:center;font:800 12px system-ui}
+.step b{display:block}
+.step span{color:var(--mut);font-size:12.5px}
+.paybox .prow{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:13px}
+.paybox .prow:last-of-type{border:0}
+.paybox .prow span{color:var(--mut)}
+.paybox .prow b{font-family:ui-monospace,monospace}
+details.faq{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:0;margin-bottom:8px}
+details.faq summary{padding:13px 15px;font-weight:700;font-size:13.5px;cursor:pointer;list-style:none}
+details.faq summary::-webkit-details-marker{display:none}
+details.faq .a{padding:0 15px 14px;font-size:13px;color:var(--mut);line-height:1.65}
+footer{background:#060C17;color:#7E92B4;padding:26px 16px 30px;font-size:11.5px;line-height:1.7}
+footer .in{max-width:680px;margin:0 auto}
+footer b{color:#C9D8F0}
+.fabs{position:fixed;bottom:84px;right:14px;display:flex;flex-direction:column;gap:10px;z-index:36}
+.fab{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(0,0,0,.45);border:0;cursor:pointer;font:800 15px system-ui;text-decoration:none}
+.fab.wa{background:var(--wa)}
+.fab.wa svg{width:25px;height:25px;fill:#04231A}
+.bnav{position:fixed;bottom:0;left:0;right:0;display:flex;background:rgba(13,22,40,.97);backdrop-filter:blur(8px);border-top:1px solid var(--line2);z-index:38;padding:6px 8px calc(6px + env(safe-area-inset-bottom))}
+.bnav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;background:none;border:0;color:var(--dim);font:600 10.5px system-ui;cursor:pointer;border-radius:10px}
+.bnav button.on{color:var(--acc);background:rgba(46,229,138,.07)}
+.bnav .bi{font-size:19px}
+.modal{position:fixed;inset:0;z-index:56;display:none;align-items:flex-end;justify-content:center}
+.modal.on{display:flex}
+.mbox{background:var(--panel);border-radius:18px 18px 0 0;padding:18px;width:min(520px,100%);max-height:86vh;overflow:auto;border:1px solid var(--line2);border-bottom:0}
+.mbox h2{margin:0 0 4px;font-size:17px}
+.mbox .sub{color:var(--mut);font-size:12.5px;margin:0 0 14px}
+.mclose{float:right;background:none;border:0;font-size:17px;cursor:pointer;color:var(--dim)}
+.fld{margin-bottom:11px}
+.fld label{display:block;font:600 12px system-ui;color:var(--mut);margin-bottom:5px}
+.fld input{width:100%;font:600 15px system-ui;padding:12px;border:1px solid var(--line2);border-radius:11px;outline:0;background:var(--panel2);color:var(--text)}
+.fld input:focus{border-color:var(--acc)}
+.ferr{color:var(--red);font-size:11.5px;min-height:15px;margin:-4px 0 8px}
+.bigbtn{width:100%;padding:13px;border-radius:11px;border:0;background:var(--acc);color:#04231A;font:800 14.5px system-ui;cursor:pointer}
+.bigbtn.wa{background:var(--wa)}
+.bigbtn.ghost{background:var(--panel2);border:1px solid var(--line2);color:var(--text)}
+.bigbtn.danger{background:none;border:1px solid var(--red);color:var(--red)}
+.bigbtn:disabled{opacity:.5;cursor:not-allowed}
+.tabs2{display:flex;gap:6px;margin-bottom:14px}
+.tabs2 button{flex:1;padding:10px;border-radius:9px;border:1px solid var(--line2);background:none;color:var(--mut);font:700 13px system-ui;cursor:pointer}
+.tabs2 button.on{background:rgba(46,229,138,.12);border-color:rgba(46,229,138,.4);color:var(--acc)}
+.walbal{font:800 34px ui-monospace,monospace;text-align:center;margin:4px 0 2px}
+.walsub{text-align:center;font-size:12px;color:var(--dim);margin-bottom:14px}
+.walbtns{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:6px}
+.mini-h{font:800 11px system-ui;letter-spacing:.08em;color:var(--mut);margin:14px 0 6px}
+.trow{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid var(--line);font-size:12px;align-items:center}
+.trow:last-child{border:0}
+.w{color:var(--acc);font-weight:700}.l{color:var(--red);font-weight:700}.g{color:var(--gold);font-weight:700}
+.empty{color:var(--dim);font-size:12px;padding:4px 0}
+.repbtn{background:var(--panel);border:1px solid var(--line2);color:var(--acc);border-radius:7px;padding:4px 9px;font:700 10.5px system-ui;cursor:pointer}
+.starpick{display:flex;gap:8px;font-size:30px;cursor:pointer;margin-bottom:10px}
+.starpick span{filter:grayscale(1);opacity:.4}
+.starpick span.on{filter:none;opacity:1}
+.msg{max-width:88%;padding:9px 12px;border-radius:12px;font-size:13px;line-height:1.5;white-space:pre-wrap}
+.msg.bot{align-self:flex-start;background:var(--panel2);border:1px solid var(--line)}
+.msg.me{align-self:flex-end;background:var(--acc);color:#04231A}
+.aichat{display:flex;flex-direction:column;gap:8px;min-height:150px;max-height:280px;overflow:auto;padding:4px 0}
+.airow{display:flex;justify-content:space-between;align-items:center;gap:8px;background:var(--panel2);border:1px solid var(--line2);border-radius:10px;padding:9px 11px;font-size:12.5px}
+.airow button{background:var(--acc);border:0;color:#04231A;border-radius:8px;padding:7px 11px;font:800 11px system-ui;cursor:pointer;flex:none}
+.chatin{display:flex;gap:8px;margin-top:10px}
+.chatin input{flex:1;background:var(--panel2);border:1px solid var(--line2);border-radius:10px;color:var(--text);font:600 13.5px system-ui;padding:11px;outline:0}
+.chatin button{background:var(--acc);border:0;color:#04231A;border-radius:10px;padding:11px 14px;font:800 12px system-ui;cursor:pointer}
+.tlist{display:flex;flex-direction:column;gap:9px}
+.tlist button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:var(--panel2);border:1px solid var(--line2);border-radius:12px;padding:13px 14px;font:600 13.5px system-ui;cursor:pointer;color:var(--text)}
+.verbox{background:var(--panel2);border:1px solid var(--line2);border-radius:12px;padding:13px;font-size:13px;line-height:1.7;margin-top:10px}
+.verbox.ok{border-color:rgba(46,229,138,.5)}
+.verbox.bad{border-color:rgba(251,113,133,.5)}
+.spin{width:14px;height:14px;border:2px solid var(--line2);border-top-color:var(--acc);border-radius:50%;animation:rot .7s linear infinite;display:inline-block}
+@keyframes rot{to{transform:rotate(360deg)}}
+.toast{position:fixed;left:50%;bottom:100px;transform:translateX(-50%);background:#17243C;border:1px solid var(--line2);color:#fff;font:600 12.5px system-ui;padding:11px 16px;border-radius:10px;z-index:80;max-width:88vw;text-align:center}
+.requl{margin:6px 0 10px;padding-left:20px;font-size:13px;color:var(--mut);line-height:1.7}
+</style>
+</head>
+<body>
+
+<header>
+  <button class="icbtn" id="menuBtn" aria-label="Menu">☰</button>
+  <div class="brand">Rahisi<span>·</span>Services</div>
+  <button class="icbtn" id="walTopBtn" title="Wallet" hidden>💼</button>
+  <button class="avatar g" id="profBtn" aria-label="Profile">👤</button>
+</header>
+
+<div class="strip" id="strip">📌 <b>KRA returns deadline season is on!</b> Nil returns filed same-day — wallet or M-Pesa.</div>
+
+<div class="veil" id="veil"></div>
+<nav class="drawer" id="drawer">
+  <div class="dhead"><b style="font-size:15px">Menu</b><button class="icbtn" id="drawerClose">✕</button></div>
+  <div class="dprof" id="drawerProf"></div>
+  <button class="dit" data-a="wallet"><span class="di">💼</span>My Wallet</button>
+  <button class="dit" data-a="deposit"><span class="di">＋</span>Deposit funds</button>
+  <button class="dit" data-a="withdraw"><span class="di">↩️</span>Withdraw to M-Pesa</button>
+  <button class="dit" data-a="requests"><span class="di">🧾</span>My requests & receipts</button>
+  <button class="dit" data-a="verify"><span class="di">🔍</span>Verify a receipt</button>
+  <div class="dsep"></div>
+  <button class="dit" data-a="ai"><span class="di">✨</span>AI service finder</button>
+  <button class="dit" data-a="support"><span class="di">🎧</span>Support</button>
+  <button class="dit" data-a="refer"><span class="di">🎁</span>Refer & earn KSh 50</button>
+  <button class="dit" data-a="rate"><span class="di">⭐</span>Rate a service</button>
+  <button class="dit" data-a="share"><span class="di">📤</span>Share this site</button>
+  <div class="dsep"></div>
+  <a class="dit" id="drWa" href="#" target="_blank" rel="noopener"><span class="di">👥</span>WhatsApp group</a>
+  <a class="dit" id="drTg" href="#" target="_blank" rel="noopener"><span class="di">✈️</span>Telegram channel</a>
+  <div class="dsep"></div>
+  <button class="dit" data-a="about"><span class="di">ℹ️</span>About us</button>
+  <button class="dit" data-a="logout" id="drawerLogout" hidden><span class="di">🚪</span>Log out</button>
+</nav>
+
+<div class="hero">
+  <div class="in">
+    <h1>Government paperwork, <em>done for you.</em></h1>
+    <p>KRA, SHA, eCitizen, HELB, NTSA, passports, business permits — deposit once, pay any service in one tap, get a receipt you can verify anytime.</p>
+    <div class="hbtns">
+      <a class="hbtn" id="waHero" href="#" target="_blank" rel="noopener">💬 Start on WhatsApp</a>
+      <button class="hbtn ghost" id="heroWallet">💼 Open wallet</button>
+    </div>
+    <p class="fine">We are a private assistance service, <b>not the Government of Kenya</b>. All official portals remain free — you can always do these yourself. You pay only for our time and know-how.</p>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat"><b id="stSvc">—</b><span>SERVICES</span></div>
+  <div class="stat"><b id="stRate">—</b><span>AVG RATING</span></div>
+  <div class="stat"><b id="stRat">—</b><span>RATINGS</span></div>
+  <div class="stat"><b>24h</b><span>REFUND PLEDGE</span></div>
+</div>
+
+<main>
+  <div class="stickywrap">
+    <div class="search">
+      <span class="mag">🔍</span>
+      <input id="q" type="search" placeholder="Search… e.g. HELB, passport, CRB, logo" autocomplete="off">
+      <button class="clr" id="qClr" hidden>✕</button>
+    </div>
+    <div class="sortrow">
+      <div class="qchips" id="qChips"></div>
+      <select class="sortsel" id="sortSel" aria-label="Sort">
+        <option value="pop">⭐ Popular first</option>
+        <option value="lo">Price: low → high</option>
+        <option value="hi">Price: high → low</option>
+        <option value="az">A – Z</option>
+      </select>
+    </div>
+    <div class="chips" id="chips"></div>
+  </div>
+
+  <div class="trust">
+    <div class="ti">🛡️</div>
+    <div><b>How your money is protected</b>
+    <p>Wallet payments debit <b>before</b> we start, and every payment gets a receipt ID you can verify on this site — no login needed. If we can't complete a task, refunds go straight back to your wallet. We never ask for your M-Pesa PIN.</p>
+    <button class="vbtn" data-a="verify">🔍 Verify a receipt</button></div>
+  </div>
+
+  <div id="grid"></div>
+
+  <div class="sec2">
+    <h2>🇰🇪 Kwa Kiswahili — kwa wazazi na wazee</h2>
+    <p style="font-size:13px;color:var(--mut);line-height:1.75;margin:0">
+    Tunakusaidia kujaza fomu za serikali: <b>KRA, SHA, eCitizen, HELB, NTSA</b> na nyingine nyingi.
+    <b>1.</b> Tafuta huduma hapo juu, au tuulize kwa WhatsApp. <b>2.</b> Lipa kwa M-Pesa au kutoka Pochi (Wallet) — mara moja utapata <b>namba ya risiti</b>, unayoweza kuthibitisha kwenye tovuti hii. <b>3.</b> Sisi tunajaza fomu; wewe unituma taarifa zinazohitajika. <b>4.</b> Kama hatukuweza kukamilisha kazi yako, <b>pesa yako inarudishwa</b> bila shida.
+    Hatuombi PIN yako ya M-Pesa — hata mtu mmoja hapa hana haki ya kuiomba. Una swali? Tuma neno <i>"Habari"</i> kwa WhatsApp: <b>0102 321 713</b>.</p>
+  </div>
+
+  <div class="sec2">
+    <h2>💬 Join our community</h2>
+    <p style="font-size:12.5px;color:var(--mut);margin:0 0 10px">Daily tips, deadline alerts and member-only offers:</p>
+    <div class="community">
+      <a class="c-wa" id="commWa" href="#" target="_blank" rel="noopener"><span class="ca">👥</span><span>WhatsApp group<small>tips, offers, Q&amp;A</small></span></a>
+      <a class="c-tg" id="commTg" href="#" target="_blank" rel="noopener"><span class="ca">✈️</span><span>Telegram channel<small>deadline alerts</small></span></a>
+    </div>
+  </div>
+
+  <div class="sec2">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><b>1. Find your service</b><span>Search, browse, tap the ✨ finder, or tap a service name to see exactly what we need from you.</span></div>
+      <div class="step"><b>2. Pay from wallet — get a receipt</b><span>Wallet debits instantly with a receipt ID; WhatsApp opens with your payment already stated.</span></div>
+      <div class="step"><b>3. We process it</b><span>We complete your part on the official portal and guide you through steps only you can do.</span></div>
+      <div class="step"><b>4. Track & receive</b><span>Watch the status move from NEW → IN PROGRESS → DONE in My Requests. Unfinished task = instant wallet refund.</span></div>
+    </div>
+  </div>
+
+  <div class="sec2 paybox">
+    <h2 style="font-size:16px;margin:0 0 8px">Direct M-Pesa (alternative)</h2>
+    <div class="prow"><span>M-Pesa name</span><b id="mpName">—</b></div>
+    <div class="prow"><span>M-Pesa number</span><b id="mpNo">—</b></div>
+    <div class="prow"><span>Paybill / Till</span><b id="mpTill">—</b></div>
+    <p style="font-size:12px;color:var(--mut);margin:10px 0 0">⚠️ Pay only after we confirm your request in chat. We never ask for your M-Pesa PIN — nobody ever should.</p>
+  </div>
+
+  <div class="refer" id="referSec">
+    <h2 style="font-size:16px;margin:0 0 6px">🎁 Refer a friend — KSh 50 off for both</h2>
+    <p>Type your name to make your code, then share it. Your friend gets KSh 50 off their first service — you get KSh 50 off your next one.</p>
+    <div class="rrow">
+      <input id="refName" placeholder="Your name (e.g. Brian K.)" maxlength="30">
+      <button id="refMake">Get my code</button>
+    </div>
+    <div id="refOut"></div>
+  </div>
+
+  <h2 style="font-size:18px;margin:26px 0 10px">Questions people ask</h2>
+  <details class="faq"><summary>Are you the government?</summary><div class="a">No. Rahisi Services is an independent assistance business. Every official portal (KRA, eCitizen, SHA, HELB, NTSA) is free to use yourself — many people simply prefer to pay someone experienced to do it quickly and correctly. We charge for our time, like a cyber café, except we come to you on WhatsApp.</div></details>
+  <details class="faq"><summary>How does the wallet work?</summary><div class="a">Create an account (phone + a 4-digit app PIN), deposit from KSh 50 by M-Pesa STK push, and pay for any service in one tap. Leftover balance stays for next time — or withdraw it back to M-Pesa (min KSh 100) within 24 hours, always.</div></details>
+  <details class="faq"><summary>What is the refund policy?</summary><div class="a">If we can't complete the task you paid for, you get a full refund — instantly back to your wallet, or to M-Pesa if you paid directly. The receipt ID in your request history is your proof.</div></details>
+  <details class="faq"><summary>Terms & privacy</summary><div class="a"><b>Terms:</b> We provide form-filling and portal-navigation assistance. Government decisions, approvals and processing times are outside anyone's control and are not guaranteed. Abusive requests will be refunded and refused.<br><br><b>Privacy:</b> We use your details only to complete the task you requested, then delete them. We never sell or reuse your information. Your app PIN is stored hashed — even we can't see it. You can delete your account and all data yourself from your profile, anytime.</div></details>
+  <details class="faq"><summary>I can't find a service on the list</summary><div class="a">Search for it above — if nothing comes up, tap the button that appears and ask us on WhatsApp. We handle far more than we can list.</div></details>
+</main>
+
+<footer>
+  <div class="in">
+    <b>Rahisi Services</b> — private digital assistance, Kenya. 🇰🇪<br>
+    WhatsApp: 0102 321 713 · Mon–Sat 8am–8pm · Replies usually within minutes during working hours<br><br>
+    <b>Disclaimer:</b> We are not affiliated with, endorsed by, or acting on behalf of the Government of Kenya, KRA, SHA, eCitizen, HELB, or NTSA. All official government services are available directly and free of charge on their own portals. We are an independent service that helps clients complete forms and navigate official processes for a service fee.<br><br>
+    © <span id="yr"></span> Rahisi Services · Payments via M-Pesa · Support via WhatsApp
+  </div>
+</footer>
+
+<div class="fabs">
+  <button class="fab" id="aiFab" style="background:linear-gradient(135deg,#7C5CFF,#2EE58A);color:#fff" aria-label="AI finder">✨</button>
+  <a class="fab wa" id="waFab" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 32 32"><path d="M16 3C9.4 3 4 8.3 4 14.9c0 2.6.8 5 2.3 7L4 29l7.3-2.3c1.9 1 4 1.6 6.2 1.6h.5c6.6 0 12-5.3 12-11.9S22.6 3 16 3zm5.9 16.9c-.3.8-1.5 1.5-2.1 1.6-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.7-.6-3-1.3-5-4.3-5.1-4.5-.1-.2-1.2-1.6-1.2-3.1s.8-2.2 1-2.5c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5s.8 1.9.8 2c.1.1.1.3 0 .5-.3.7-.7 1-.9 1.3-.1.2-.3.4-.1.7.2.4.9 1.5 1.9 2.4 1.3 1.2 2.4 1.5 2.8 1.7.3.2.5.1.7-.1.2-.2.8-.9 1-1.2.2-.3.4-.3.7-.2.3.1 1.9.9 2.2 1.1.3.2.5.2.6.4.1.1.1.8-.2 1.5z"/></svg>
+  </a>
+</div>
+
+<nav class="bnav">
+  <button id="bnHome" class="on"><span class="bi">🏠</span>Home</button>
+  <button id="bnWallet"><span class="bi">💼</span>Wallet</button>
+  <button id="bnAi"><span class="bi">✨</span>AI finder</button>
+  <button id="bnSup"><span class="bi">🎧</span>Support</button>
+</nav>
+
+<!-- AUTH -->
+<div class="modal" id="authM"><div class="mbox">
+  <button class="mclose" onclick="closeAll()">✕</button>
+  <div class="tabs2"><button id="tabReg" class="on">Create account</button><button id="tabLog">Login</button></div>
+  <div id="regForm">
+    <div class="fld"><label>Your full name</label><input id="rName" placeholder="Jane Wanjiku"></div>
+    <div class="fld"><label>M-Pesa phone number</label><input id="rPhone" inputmode="tel" placeholder="07XX XXX XXX"></div>
+    <div class="fld"><label>Choose a 4-digit app PIN</label><input id="rPin" type="password" inputmode="numeric" maxlength="4" placeholder="••••"><p style="font-size:11px;color:var(--dim);margin:5px 0 0">App PIN only — NOT your M-Pesa PIN. Stored hashed; even we can't see it.</p></div>
+    <div class="ferr" id="regErr"></div>
+    <button class="bigbtn" id="regGo">Create account</button>
+  </div>
+  <div id="logForm" hidden>
+    <div class="fld"><label>Phone number</label><input id="lPhone" inputmode="tel" placeholder="07XX XXX XXX"></div>
+    <div class="fld"><label>App PIN</label><input id="lPin" type="password" inputmode="numeric" maxlength="4" placeholder="••••"></div>
+    <div class="ferr" id="logErr"></div>
+    <button class="bigbtn" id="logGo">Login</button>
+  </div>
+</div></div>
+
+<div class="modal" id="walM"><div class="mbox" id="walBox"></div></div>
+<div class="modal" id="profM"><div class="mbox" id="profBox"></div></div>
+<div class="modal" id="verM"><div class="mbox" id="verBox"></div></div>
+<div class="modal" id="detM"><div class="mbox" id="detBox"></div></div>
+
+<!-- RATING -->
+<div class="modal" id="rateM"><div class="mbox">
+  <button class="mclose" onclick="closeAll()">✕</button>
+  <h2>Rate this service</h2>
+  <p class="sub" id="rateSvc"></p>
+  <div class="fld"><label>Which service?</label>
+    <input id="ratePick" list="svcList" placeholder="Start typing…" autocomplete="off">
+    <datalist id="svcList"></datalist>
+  </div>
+  <div class="starpick" id="starPick"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+  <div class="fld"><label>Your name (optional)</label><input id="rateName" placeholder="Anonymous"></div>
+  <div class="fld"><label>Comment (optional)</label><input id="rateComment" placeholder="Fast and helpful!" maxlength="200"></div>
+  <div class="ferr" id="rateErr"></div>
+  <button class="bigbtn" id="rateGo">Submit rating</button>
+</div></div>
+
+<!-- AI -->
+<div class="modal" id="aiM"><div class="mbox">
+  <button class="mclose" onclick="closeAll()">✕</button>
+  <h2>✨ Smart service finder</h2>
+  <p class="sub">Describe what you need in your own words. Runs entirely on your phone — nothing you type is uploaded.</p>
+  <div class="aichat" id="aiChat"></div>
+  <div class="chatin">
+    <input id="aiIn" placeholder="e.g. I want to travel abroad…">
+    <button id="aiGo">Find</button>
+  </div>
+</div></div>
+
+<!-- SUPPORT -->
+<div class="modal" id="supM"><div class="mbox">
+  <button class="mclose" onclick="closeAll()">✕</button>
+  <h2>🎧 How can we help?</h2>
+  <p class="sub">Working hours: Mon–Sat, 8am–8pm · replies usually within minutes. Tap a topic — it opens WhatsApp pre-written.</p>
+  <div class="tlist">
+    <button data-t="Hello! I want to know the STATUS of my task. My receipt ID: "><span>⏳</span>Status of a task I paid for</button>
+    <button data-t="Hello! I have a question about PAYMENT / wallet / M-Pesa. My issue: "><span>💳</span>Payment or wallet question</button>
+    <button data-t="Hello! I'd like a REFUND. My receipt ID and reason: "><span>↩️</span>Request a refund</button>
+    <button data-t="Hello! I used a REFERRAL code. My friend's name: "><span>🎁</span>I have a referral code</button>
+    <button data-t="Hello! I need help with something not on the list: "><span>💬</span>Something else</button>
+  </div>
+  <p style="font-size:11.5px;color:var(--dim);margin:12px 0 0">Urgent? Start your message with URGENT.</p>
+</div></div>
+
+<!-- ABOUT -->
+<div class="modal" id="abtM"><div class="mbox">
+  <button class="mclose" onclick="closeAll()">✕</button>
+  <h2>About Rahisi Services</h2>
+  <p class="sub" style="line-height:1.7">We're a Kenya-based digital assistance team — a cyber café that comes to you on WhatsApp and this site.<br><br><b>What we are:</b> fast, honest form-filling and portal navigation, with verifiable receipts and instant wallet refunds.<br><b>What we are not:</b> the government, and not able to influence government decisions or timelines.<br><br>Every payment gets a receipt ID you can verify on this site. Every unfinished task is refunded. That's the whole business model.</p>
+  <button class="bigbtn" onclick="closeAll()">Close</button>
+</div></div>
+
+<!-- CONFIRM -->
+<div class="modal" id="askM"><div class="mbox">
+  <h2 id="askTitle"></h2><div id="askBody" style="font-size:13.5px;color:var(--mut);line-height:1.6"></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px">
+    <button class="bigbtn ghost" id="askNo">Cancel</button>
+    <button class="bigbtn" id="askOk">Confirm</button>
+  </div>
+</div></div>
+
+<script>
+'use strict';
+/* ═══════════════════════════════════════════════════════════
+   RAHISI SERVICES v6 — final frontend before backend
+   👉 EDIT CONFIG: API_URL + MPESA_NAME (+ og:url after deploy) 👈
+   ═══════════════════════════════════════════════════════════ */
+const CONFIG={
+  API_URL:"",                   // 👈 "https://rahasi-backend-xxxx.onrender.com"
+  WHATSAPP:"254102321713",
+  WHATSAPP_GROUP:"https://chat.whatsapp.com/I64UOLjSxM5GW6LvRp0UHG?s=cl&p=a&mlu=4&ilr=4&iam=2",
+  TELEGRAM:"https://t.me/+dUTnzFBM92NkNjA0",
+  MPESA_NAME:"EDIT_ME_MY_NAME", // 👈 name registered on your M-Pesa line
+  MPESA_NUMBER:"0102 321 713",
+  MPESA_TILL:"None yet — pay to number",
+  REFERRAL_DISCOUNT:50,
+};
+
+const SERVICES=[
+/* ⭐ MOST REQUESTED */
+{cat:'KRA',ico:'🧾',name:'KRA Tax Return Filing',eta:'Same day',price:300,d:'Annual nil or income returns filed right, every time. Deadline-proof.',pop:1,req:['Your KRA PIN','iTax email & phone','For income returns: your P9 or income details']},
+{cat:'KRA',ico:'🆔',name:'KRA PIN Registration',eta:'24 hrs',price:300,d:'First-time PIN for jobs, HELB, banking or SIM registration.',pop:1,req:['Your national ID','Personal phone & email','Parent/guardian ID (if under 18)']},
+{cat:'Health',ico:'🏥',name:'SHA / SHIF Registration',eta:'24 hrs',price:300,d:'Register you and your dependents on the Social Health Authority portal.',pop:1,req:['Your national ID','Phone number to register','Dependents\' details (if any)']},
+{cat:'Education',ico:'🎓',name:'HELB Loan Application',eta:'24–48 hrs',price:400,d:'First-time application done right — avoid rejections that cost a year.',pop:1,req:['Your ID / birth certificate','KRA PIN','School & guardian details']},
+{cat:'Documents',ico:'🏛️',name:'eCitizen Account Setup',eta:'2 hrs',price:250,d:'Account created, verified, and you shown how to use it — patiently.',pop:1,req:['Your national ID','Phone & email','We guide you through the verification code']},
+{cat:'Documents',ico:'🌍',name:'Passport Application + Booking',eta:'24 hrs',price:450,d:'eCitizen application filled and biometrics appointment booked near you.',pop:1,req:['Your ID & birth certificate copies','Preferred passport size (34/50/66 pages)','Preferred town for biometrics']},
+{cat:'Documents',ico:'🌍',name:'Passport Renewal (Adult)',eta:'24 hrs',price:450,d:'Renewal application and appointment booked without the queues.',pop:1,req:['Current/expired passport','ID copy','Preferred town for biometrics']},
+{cat:'Documents',ico:'🪪',name:'National ID Application Support',eta:'24 hrs',price:350,d:'First-time ID pre-enrolment guidance plus exactly what to carry.',pop:1,req:['Birth certificate','Parent/guardian ID details','Your county/sub-county']},
+{cat:'Documents',ico:'👶',name:'Birth Certificate Application',eta:'24 hrs',price:350,d:'New applications and additions for babies, school and passport use.',pop:1,req:['Hospital birth notification or parent IDs','Child\'s name(s)','Parents\' IDs']},
+{cat:'Documents',ico:'👮',name:'Police Clearance (Good Conduct)',eta:'24 hrs',price:400,d:'DCI account, booking and payment sorted — just show up for prints.',pop:1,req:['Your ID & KRA PIN','eCitizen account','Preferred DCI station']},
+{cat:'Vehicles',ico:'🚗',name:'Driving Licence Renewal',eta:'24 hrs',price:300,d:'DL renewal on TIMS done, with sticker guidance included.',pop:1,req:['Your DL number','ID number','TIMS phone number']},
+{cat:'Education',ico:'📚',name:'KUCCPS Application / Revision',eta:'24 hrs',price:350,d:'Course choices entered with proper guidance on cutoff points.',pop:1,req:['Your index number','KCSE grade (or predicted)','Preferred courses & counties']},
+{cat:'Career',ico:'📄',name:'Professional CV Writing',eta:'48 hrs',price:600,d:'Clean, ATS-friendly CV + cover letter. Delivered as PDF + Word.',pop:1,req:['Your work & education history','Jobs you\'re targeting (links help)','Any current CV (even rough)']},
+{cat:'Business',ico:'🏪',name:'Business Name Registration',eta:'24 hrs',price:550,d:'Name search and registration on eCitizen for your hustle.',pop:1,req:['2–3 proposed names (we check availability)','Your ID & KRA PIN','County of business']},
+/* KRA */
+{cat:'KRA',ico:'🔎',name:'KRA PIN Retrieval (Lost PIN)',eta:'2 hrs',price:250,d:'PIN recovered and emailed to you in minutes.'},
+{cat:'KRA',ico:'🔑',name:'iTax Password / Email Reset',eta:'24 hrs',price:300,d:'Locked out of iTax? Access restored the honest way.'},
+{cat:'KRA',ico:'✏️',name:'KRA Details Amendment',eta:'24 hrs',price:350,d:'Update email, phone, address or bank details on iTax.'},
+{cat:'KRA',ico:'🏠',name:'Rental Income Return Filing',eta:'24 hrs',price:400,d:'Monthly residential rental income returns filed correctly.'},
+{cat:'KRA',ico:'💰',name:'Turnover Tax (TOT) Registration',eta:'24 hrs',price:300,d:'Small-business turnover tax registered the right way.'},
+{cat:'KRA',ico:'🧾',name:'VAT Registration',eta:'24 hrs',price:400,d:'VAT obligation registered for your business on iTax.'},
+{cat:'KRA',ico:'✅',name:'KRA Tax Compliance Certificate',eta:'24 hrs',price:450,d:'TCC applied for tenders, jobs, or travel — follow-up included.'},
+{cat:'KRA',ico:'⚖️',name:'KRA Objection / Waiver Application',eta:'48 hrs',price:500,d:'Dispute a wrong assessment or request penalty waiver.'},
+{cat:'KRA',ico:'🤲',name:'KRA Penalty Amnesty Application',eta:'48 hrs',price:500,d:'Qualifying penalties and interest waiver applications prepared.'},
+{cat:'KRA',ico:'🖨️',name:'KRA PIN Certificate Printing',eta:'1 hr',price:250,d:'Official PIN certificate printed and sent as PDF.'},
+{cat:'KRA',ico:'📤',name:'Withholding / VAT Return Filing',eta:'24 hrs',price:350,d:'Business VAT and withholding returns filed on schedule.'},
+{cat:'KRA',ico:'👔',name:'Employment Return (P9) Filing',eta:'24 hrs',price:350,d:'Used your P9 from work? We file it correctly for you.'},
+{cat:'KRA',ico:'🏢',name:'PAYE / Employer Registration',eta:'24 hrs',price:400,d:'Register as an employer and file PAYE deductions properly.'},
+/* Health */
+{cat:'Health',ico:'👨‍👩‍👧',name:'SHA Add Dependents',eta:'24 hrs',price:250,d:'Add spouse or children to your SHIF cover properly.'},
+{cat:'Health',ico:'🔄',name:'SHA Details Update',eta:'24 hrs',price:250,d:'Fix names, phone numbers or employer details on SHA.'},
+{cat:'Health',ico:'💳',name:'SHA Contribution Payment Help',eta:'2 hrs',price:250,d:'Payments made right, with confirmation you can keep.'},
+{cat:'Health',ico:'🪪',name:'SHA Member Record Recovery',eta:'24 hrs',price:300,d:'Lost access to your SHA record? We recover it.'},
+{cat:'Health',ico:'👴',name:'Elder SHA Registration (we do it all)',eta:'24 hrs',price:350,d:'For parents and grandparents — handled end to end on their behalf.'},
+/* Education */
+{cat:'Education',ico:'📜',name:'HELB Compliance Certificate',eta:'24 hrs',price:350,d:'Needed for jobs and tenders — applied and followed up.'},
+{cat:'Education',ico:'🔍',name:'HELB Balance & Repayment Check',eta:'2 hrs',price:250,d:'Know exactly what you owe and your repayment options.'},
+{cat:'Education',ico:'📅',name:'HELB Repayment Plan Setup',eta:'24 hrs',price:300,d:'Arrange manageable repayments before penalties pile up.'},
+{cat:'Education',ico:'📬',name:'HELB Disbursement Follow-up',eta:'24 hrs',price:300,d:'Loan approved but money not moving? We chase it down.'},
+{cat:'Education',ico:'🔀',name:'KUCCPS Inter-University Transfer',eta:'48 hrs',price:450,d:'Transfer application done properly, with course-matching advice.'},
+{cat:'Education',ico:'📋',name:'KUCCPS Placement Status Check',eta:'2 hrs',price:250,d:'Find out where you were placed, fast.'},
+{cat:'Education',ico:'📎',name:'Admission Letter & Fee Structure Download',eta:'2 hrs',price:250,d:'Your letter and fee structure retrieved and sent to you.'},
+{cat:'Education',ico:'🛠️',name:'TVET / Technical College Application',eta:'24 hrs',price:300,d:'Application to your TVET of choice, done right.'},
+{cat:'Education',ico:'🎒',name:'University Portal Application Help',eta:'24 hrs',price:300,d:'Any university admission portal, handled for you.'},
+{cat:'Education',ico:'✍️',name:'KNEC Exam Registration Help',eta:'24 hrs',price:350,d:'KCSE / KCPE private or repeat registration assistance.'},
+{cat:'Education',ico:'📑',name:'KNEC Certificate Application',eta:'48 hrs',price:400,d:'Replacement certificates applied for and tracked.'},
+{cat:'Education',ico:'🧾',name:'KNEC Result Slip / Confirmation',eta:'48 hrs',price:400,d:'Result slips and certification confirmations sorted.'},
+{cat:'Education',ico:'👩‍🏫',name:'TSC Number Application',eta:'48 hrs',price:500,d:'Teacher registration application prepared and submitted.'},
+{cat:'Education',ico:'📊',name:'KASNEB / CPA Registration',eta:'24 hrs',price:400,d:'Exam registration and portal setup for accounting students.'},
+{cat:'Education',ico:'🏫',name:'County Bursary Application',eta:'24 hrs',price:300,d:'Bursary forms filled correctly so money is not left on the table.'},
+{cat:'Education',ico:'🏅',name:'Scholarship Application Support',eta:'48 hrs',price:400,d:'Local and international scholarship forms, essays formatted.'},
+{cat:'Education',ico:'🔧',name:'NITA Trade Test Registration',eta:'24 hrs',price:350,d:'Grade test registration for artisans and fundis.'},
+{cat:'Education',ico:'📕',name:'University Project Formatting & Referencing',eta:'48 hrs',price:450,d:'Your own work formatted, referenced and print-ready. Guidance, not ghostwriting.'},
+/* Documents */
+{cat:'Documents',ico:'🗓️',name:'Birth Certificate Late Registration',eta:'48 hrs',price:450,d:'Older births registered properly, paperwork prepared.'},
+{cat:'Documents',ico:'🕊️',name:'Death Certificate Application',eta:'48 hrs',price:400,d:'Handled respectfully and promptly for families.'},
+{cat:'Documents',ico:'💍',name:'Marriage Certificate / AG Booking',eta:'48 hrs',price:450,d:'Registrar of marriages notice and booking arranged.'},
+{cat:'Documents',ico:'🌐',name:'Certificate of No Impediment',eta:'48 hrs',price:500,d:'Needed for marrying abroad — applied and followed up.'},
+{cat:'Documents',ico:'📛',name:'Change of Name (Deed Poll)',eta:'48 hrs',price:550,d:'Kit prepared and process guided start to finish.'},
+{cat:'Documents',ico:'🚨',name:'DCI Abstract (Lost ID / Phone)',eta:'24 hrs',price:300,d:'Police abstract for lost documents, sorted fast.'},
+{cat:'Documents',ico:'✈️',name:'Police Clearance for Abroad',eta:'48 hrs',price:550,d:'Good conduct done for foreign use, with courier guidance.'},
+{cat:'Documents',ico:'🪪',name:'ID Replacement (Lost) Support',eta:'24 hrs',price:300,d:'Replacement application prepared, steps clearly guided.'},
+{cat:'Documents',ico:'🏢',name:'Huduma Centre Appointment Booking',eta:'24 hrs',price:250,d:'Skip the dawn queue — appointment booked for the service you need.'},
+{cat:'Documents',ico:'🌏',name:'Refugee / Alien Registration Support',eta:'48 hrs',price:500,d:'Documentation assistance handled with dignity.'},
+{cat:'Documents',ico:'📎',name:'Certified Copies Arrangement',eta:'24 hrs',price:300,d:'Get your documents certified where they must be.'},
+{cat:'Documents',ico:'📜',name:'Affidavit Typing & e-Filing Support',eta:'24 hrs',price:350,d:'Draft prepared and e-filing guided (advocate signing separate).'},
+{cat:'Documents',ico:'📝',name:'Simple Agreement / Contract Drafting',eta:'48 hrs',price:500,d:'Rentals, sales, services — clear plain-language drafts for an advocate to review.'},
+{cat:'Documents',ico:'🤵',name:'Passport-Size Photos (Digital)',eta:'Same day',price:250,d:'Send a selfie on WhatsApp, receive compliant digital passport photos.'},
+/* Travel & Visa */
+{cat:'Travel & Visa',ico:'🛂',name:'Visa Guidance (US / UK / Canada)',eta:'48 hrs',price:600,d:'Forms, booking and document checklists done with you.'},
+{cat:'Travel & Visa',ico:'🇪🇺',name:'Schengen / Europe Visa Help',eta:'48 hrs',price:650,d:'Application forms and appointment booking assistance.'},
+{cat:'Travel & Visa',ico:'🇰🇪',name:'Kenya ETA Application (visitors)',eta:'24 hrs',price:350,d:'Electronic travel authorisation for your guests, sorted.'},
+{cat:'Travel & Visa',ico:'💼',name:'Work Permit / Special Pass Application',eta:'48 hrs',price:650,d:'Employer or individual applications prepared properly.'},
+{cat:'Travel & Visa',ico:'👶',name:'Dependant Pass Application',eta:'48 hrs',price:550,d:'Bring your family over legally — paperwork handled.'},
+{cat:'Travel & Visa',ico:'👶',name:'Passport Application for Children',eta:'24 hrs',price:450,d:'Minor applications with parental consent documents done right.'},
+{cat:'Travel & Visa',ico:'🔁',name:'Foreign Licence Exchange Support',eta:'48 hrs',price:450,d:'Converting a foreign driving licence — process handled.'},
+{cat:'Travel & Visa',ico:'✈️',name:'Flight Booking Assistance',eta:'24 hrs',price:400,d:'Best-value options found and booked with your approval.'},
+{cat:'Travel & Visa',ico:'🏨',name:'Hotel / Accommodation Booking Help',eta:'24 hrs',price:350,d:'Verified options within your budget, booked and confirmed.'},
+/* Vehicles */
+{cat:'Vehicles',ico:'🚙',name:'NTSA TIMS Account Setup',eta:'2 hrs',price:250,d:'TIMS account created and you shown how to use it.'},
+{cat:'Vehicles',ico:'💳',name:'Smart DL Application',eta:'24 hrs',price:350,d:'New smart driving licence application processed.'},
+{cat:'Vehicles',ico:'⏳',name:'Interim Driving Licence',eta:'24 hrs',price:300,d:'Interim DL issued so you can drive while waiting.'},
+{cat:'Vehicles',ico:'🔁',name:'Logbook (Motor Vehicle) Transfer',eta:'48 hrs',price:500,d:'Buy or sell a car? Transfer initiated correctly on NTSA.'},
+{cat:'Vehicles',ico:'🔎',name:'NTSA Vehicle Ownership Search',eta:'2 hrs',price:300,d:'Know who really owns that car before you pay.'},
+{cat:'Vehicles',ico:'🔢',name:'Number Plate Application',eta:'24 hrs',price:350,d:'New or replacement plates applied for.'},
+{cat:'Vehicles',ico:'🚌',name:'PSV Badge Application',eta:'48 hrs',price:400,d:'Conductor / driver badge applications handled.'},
+{cat:'Vehicles',ico:'🏁',name:'Driving Test Booking Support',eta:'24 hrs',price:300,d:'Test booked at a centre near you, reminders included.'},
+{cat:'Vehicles',ico:'🔐',name:'TIMS Password Reset',eta:'2 hrs',price:250,d:'Lost TIMS access? Restored in minutes.'},
+{cat:'Vehicles',ico:'🔧',name:'Motor Vehicle Inspection Booking',eta:'24 hrs',price:300,d:'Inspection booked at a centre convenient for you.'},
+/* Business */
+{cat:'Business',ico:'🏢',name:'Limited Company Registration',eta:'48 hrs',price:800,d:'Full ltd company registration with PIN and CR1-CR12 set.'},
+{cat:'Business',ico:'📄',name:'CR12 Certificate Application',eta:'24 hrs',price:450,d:'Company ownership record for tenders and banking.'},
+{cat:'Business',ico:'🔁',name:'CR29 – Change of Company Directors',eta:'48 hrs',price:500,d:'Director changes filed correctly with the Registrar.'},
+{cat:'Business',ico:'🧾',name:'Company KRA PIN Registration',eta:'24 hrs',price:400,d:'Company PIN registered on iTax after incorporation.'},
+{cat:'Business',ico:'🏛️',name:'County Business Permit Application',eta:'24 hrs',price:450,d:'Single business permit for your county, priced right.'},
+{cat:'Business',ico:'🔄',name:'Business Permit Renewal',eta:'24 hrs',price:350,d:'Renewed before deadline, receipts kept safe.'},
+{cat:'Business',ico:'🔠',name:'Business Name Change',eta:'48 hrs',price:500,d:'Rename your registered business properly on eCitizen.'},
+{cat:'Business',ico:'👷',name:'NSSF Registration (Employer / Staff)',eta:'24 hrs',price:350,d:'Statutory registration done for your workers.'},
+{cat:'Business',ico:'🧑‍💼',name:'NSSF Member Registration',eta:'24 hrs',price:300,d:'Personal NSSF account created and card guidance given.'},
+{cat:'Business',ico:'™️',name:'Trademark / Brand Name Search',eta:'48 hrs',price:550,d:'Protect your brand name before someone else takes it.'},
+{cat:'Business',ico:'🍺',name:'Liquor License Application',eta:'48 hrs',price:600,d:'County liquor licence applications prepared correctly.'},
+{cat:'Business',ico:'🍽️',name:'Food Handling Certificate',eta:'24 hrs',price:400,d:'Health certificate for your food business or staff.'},
+{cat:'Business',ico:'🔥',name:'Fire Clearance Certificate',eta:'48 hrs',price:450,d:'Fire safety clearance for premises, inspection guidance.'},
+{cat:'Business',ico:'🧺',name:'Hawker / Market Stall Permit',eta:'24 hrs',price:300,d:'County permits for your daily hustle.'},
+{cat:'Business',ico:'🏠',name:'Boma Yangu / Housing Levy Registration',eta:'24 hrs',price:300,d:'Affordable housing portal account and contributions sorted.'},
+/* Land */
+{cat:'Land',ico:'🗺️',name:'Land / Title Search',eta:'48 hrs',price:450,d:'Official search on any title before you buy land.'},
+{cat:'Land',ico:'🧾',name:'Land Rent Clearance Certificate',eta:'48 hrs',price:450,d:'Clearance certificate applied for land transactions.'},
+{cat:'Land',ico:'🏙️',name:'Rates Clearance Certificate',eta:'48 hrs',price:450,d:'County rates cleared and certificate obtained.'},
+{cat:'Land',ico:'🔁',name:'Title Deed Transfer Guidance',eta:'48 hrs',price:650,d:'Step-by-step transfer guidance so nothing is skipped.'},
+{cat:'Land',ico:'🧭',name:'Registry Index Map Search',eta:'48 hrs',price:500,d:'Beacon and boundary map pulled for your parcel.'},
+{cat:'Land',ico:'🏢',name:'Company / Business Search (Registrar)',eta:'24 hrs',price:350,d:'Official company search report for due diligence.'},
+{cat:'Land',ico:'💵',name:'Land Rent Payment Assistance',eta:'24 hrs',price:300,d:'Annual land rent paid correctly, receipts kept for your records.'},
+/* Career */
+{cat:'Career',ico:'✉️',name:'Cover Letter / Application Letter',eta:'24 hrs',price:300,d:'Tailored to the exact job you are applying for.'},
+{cat:'Career',ico:'🔗',name:'LinkedIn Profile Optimization',eta:'48 hrs',price:500,d:'Profile rewritten so recruiters actually find you.'},
+{cat:'Career',ico:'📤',name:'Job Portal Application Help',eta:'24 hrs',price:300,d:'CV uploaded and applications submitted for you.'},
+{cat:'Career',ico:'🏛️',name:'PSC / Government Jobs Portal Help',eta:'24 hrs',price:400,d:'Public Service Commission applications done correctly.'},
+{cat:'Career',ico:'🎤',name:'Interview Preparation Coaching',eta:'48 hrs',price:500,d:'One session, real questions, honest feedback.'},
+{cat:'Career',ico:'📬',name:'Email / Job Alerts Setup',eta:'2 hrs',price:250,d:'Professional email plus daily job alerts configured.'},
+{cat:'Career',ico:'🌐',name:'Simple Personal / Portfolio Website',eta:'3 days',price:1500,d:'A one-page site showing your work to employers.'},
+{cat:'Career',ico:'🖼️',name:'Professional CV Photo Retouch',eta:'24 hrs',price:250,d:'Phone photo turned into a proper CV headshot.'},
+{cat:'Career',ico:'📚',name:'Portfolio PDF Design',eta:'48 hrs',price:400,d:'Your work samples assembled into one sharp, shareable PDF.'},
+{cat:'Career',ico:'📨',name:'Job Follow-up Email Drafting',eta:'24 hrs',price:250,d:'A polite, professional follow-up that gets responses.'},
+/* CRB & Money */
+{cat:'CRB & Money',ico:'🏦',name:'CRB Clearance Certificate',eta:'48 hrs',price:500,d:'Clearance certificate for loans, jobs and tenders.'},
+{cat:'CRB & Money',ico:'📊',name:'CRB Credit Report Check',eta:'2 hrs',price:350,d:'See exactly what lenders see about you.'},
+{cat:'CRB & Money',ico:'👤',name:'Metropol / TransUnion Setup',eta:'24 hrs',price:300,d:'Accounts created and you shown how to monitor them.'},
+{cat:'CRB & Money',ico:'♿',name:'Tax Exemption Certificate (PWD)',eta:'48 hrs',price:500,d:'Persons-with-disability tax exemption applications handled.'},
+{cat:'CRB & Money',ico:' ✍️',name:'Debt Repayment Plan Letter',eta:'24 hrs',price:350,d:'A clear, honest proposal letter to your lender — often unlocks flexibility.'},
+/* Digital & Design */
+{cat:'Digital & Design',ico:'📧',name:'Email Account Setup (Gmail)',eta:'1 hr',price:250,d:'For elders and first-timers — set up with patience, in your language.'},
+{cat:'Digital & Design',ico:'💬',name:'WhatsApp Business Setup',eta:'24 hrs',price:350,d:'Catalogue, auto-replies and profile for your hustle.'},
+{cat:'Digital & Design',ico:'📣',name:'Facebook / Instagram Business Page',eta:'24 hrs',price:400,d:'Professional pages your customers can find.'},
+{cat:'Digital & Design',ico:'🎵',name:'TikTok Business Account Setup',eta:'24 hrs',price:350,d:'Set up properly so your content can sell.'},
+{cat:'Digital & Design',ico:'📍',name:'Google Maps Listing for Your Shop',eta:'24 hrs',price:400,d:'Customers searching nearby will actually find you.'},
+{cat:'Digital & Design',ico:'📨',name:'Bulk SMS Setup for Your Business',eta:'24 hrs',price:400,d:'Reach all your customers at once — sender ID sorted.'},
+{cat:'Digital & Design',ico:'🎨',name:'Poster / Flyer Design',eta:'24 hrs',price:350,d:'Sharp poster for your event or business, print-ready.'},
+{cat:'Digital & Design',ico:'✨',name:'Basic Logo Design',eta:'48 hrs',price:500,d:'A clean logo your business can grow with.'},
+{cat:'Digital & Design',ico:'🪪',name:'Business Card Design',eta:'24 hrs',price:300,d:'Print-ready cards that look professional.'},
+{cat:'Digital & Design',ico:'📄',name:'Letterhead & Email Signature',eta:'24 hrs',price:350,d:'Matched letterhead + email signature for your business.'},
+{cat:'Digital & Design',ico:'🗒️',name:'Google Form Setup for Your Business',eta:'24 hrs',price:300,d:'Orders, bookings or registrations collected neatly.'},
+{cat:'Digital & Design',ico:'🧾',name:'Simple Invoice / Receipt Template',eta:'24 hrs',price:250,d:'Branded template you can reuse forever.'},
+{cat:'Digital & Design',ico:'🖨️',name:'Printing & Scanning (10 pages)',eta:'Same day',price:250,d:'Send files on WhatsApp, collect or receive PDFs.'},
+{cat:'Digital & Design',ico:'⌨️',name:'Typing & Formatting (per page)',eta:'Same day',price:250,d:'Neat, formatted documents from your handwriting.'},
+{cat:'Digital & Design',ico:'🌍',name:'Translation EN ↔ Kiswahili (per page)',eta:'24 hrs',price:300,d:'Accurate human translation, not machine output.'},
+{cat:'Digital & Design',ico:'🗂️',name:'Data Entry (per 100 rows)',eta:'24 hrs',price:400,d:'Excel or Google Sheets, double-checked for errors.'},
+{cat:'Digital & Design',ico:'📦',name:'Online Shopping & Delivery Help',eta:'24 hrs',price:300,d:'We order and track for elders who cannot.'},
+{cat:'Digital & Design',ico:'📱',name:'Smartphone Training for Elders (1 hr)',eta:'By appointment',price:400,d:'Patient one-on-one: calls, WhatsApp, M-Pesa, safety.'},
+{cat:'Digital & Design',ico:'📝',name:'Online Form Filling (any portal)',eta:'2 hrs',price:250,d:'Any online form, filled accurately while you watch.'},
+{cat:'Digital & Design',ico:'🔐',name:'Own-Account Recovery Guidance',eta:'24 hrs',price:300,d:'Step-by-step guidance to recover YOUR OWN Gmail/Facebook via official channels.'},
+/* Legal & Courts */
+{cat:'Legal & Courts',ico:'⚖️',name:'Court e-Filing / Case Search Support',eta:'48 hrs',price:450,d:'Case status checks and e-filing navigation assistance.'},
+{cat:'Legal & Courts',ico:'🧑‍⚖️',name:'Small Claims Court Filing Guidance',eta:'48 hrs',price:500,d:'Recover debts under KSh 1M — claim prepared and filing guided.'},
+];
+const CATS=['All','KRA','Education','Health','Documents','Travel & Visa','Vehicles','Business','Land','Career','CRB & Money','Digital & Design','Legal & Courts'];
+const CAT_REQ={KRA:['Your KRA PIN','iTax email & phone','Any letters/notices from KRA (if relevant)'],Education:['Your ID / birth certificate','School or index numbers','Guardian details (if needed)'],Health:['Your national ID','Registered phone number','Dependents\' details (if any)'],Documents:['Your ID (copy or clear photo)','Relevant existing documents','Best phone to reach you'],['Travel & Visa']:['Passport bio page','Your ID','Travel dates & purpose'],Vehicles:['ID number','DL / plate / TIMS details (as applies)'],Business:['Proposed names or company details','Your ID & KRA PIN','County of operation'],Land:['Title / parcel number','Seller & buyer IDs (for transfers)','Any prior documents'],Career:['Your history (work, school, skills)','Target job links (if any)','Photo (optional)'],['CRB & Money']:['Your ID number','Registered phone number'],['Digital & Design']:['A clear description of what you want','Any logos/photos to use'],['Legal & Courts']:['Case / party names','Court station (if known)','Your ID']};
+
+const AI_SYN={passport:'passport travel visa eta ecitizen renewal',abroad:'passport visa travel flight',visa:'visa passport travel',travel:'passport visa eta flight hotel',flight:'flight booking travel',hotel:'hotel accommodation booking',job:'cv career cover letter linkedin psc',jobs:'cv career',employment:'cv career',cv:'cv',loan:'helb crb loan',helb:'helb loan',tax:'kra returns itax',kra:'kra returns itax pin',sick:'sha health shif',hospital:'sha health shif',insurance:'sha health',health:'sha shif',car:'ntsa dl tims vehicle driving inspection',driving:'ntsa dl vehicle',licence:'ntsa dl',license:'ntsa dl',baby:'birth certificate',child:'birth certificate dependents sha passport',school:'kuccps tvet helb knec bursary scholarship admission',college:'kuccps tvet',university:'kuccps transfer',bursary:'bursary',land:'land title search rates rent',plot:'land title',buy:'land title vehicle ownership',company:'business company cr12 cr29 registration',business:'business permit company registration',permit:'business permit county liquor',logo:'logo design',poster:'poster flyer design',flyer:'poster flyer design',design:'logo poster flyer card letterhead',website:'website portfolio',crb:'crb clearance credit',credit:'crb clearance',debt:'debt repayment plan letter',typist:'typing formatting data entry',typing:'typing formatting',translate:'translation',printing:'printing scanning',shop:'google maps business page',elder:'smartphone training email elders sha',form:'online form filling google form',police:'police clearance dci abstract huduma',goodconduct:'police clearance',marriage:'marriage certificate',death:'death certificate',name:'change of name deed poll',id:'national id replacement huduma',photos:'passport photos',contract:'agreement contract drafting',housing:'boma yangu housing levy',nssf:'nssf',scholarship:'scholarship',amnesty:'kra amnesty',inspection:'motor vehicle inspection',court:'small claims court case filing',sms:'bulk sms',card:'business card design',invoice:'invoice receipt template'};
+
+const $=s=>document.querySelector(s);
+const API=(CONFIG.API_URL||'').replace(/\/+$/,'');
+const waLink=txt=>`https://wa.me/${CONFIG.WHATSAPP}?text=${encodeURIComponent(txt)}`;
+const escX=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const mpesaNamed=!CONFIG.MPESA_NAME.includes('EDIT_ME');
+const SVC_BY_NAME=Object.fromEntries(SERVICES.map(s=>[s.name,s]));
+
+let CFG={walletEnabled:false,minDeposit:50,minWithdraw:100};
+let AUTH=null;try{AUTH=JSON.parse(localStorage.getItem('rahasi_auth')||'null')}catch(e){}
+let FAVS=[];try{FAVS=JSON.parse(localStorage.getItem('rahasi_favs')||'[]')}catch(e){}
+let RECENT=[];try{RECENT=JSON.parse(localStorage.getItem('rahasi_recent')||'[]')}catch(e){}
+let RATINGS=[],curCat='All',SORT='pop',CUR_LIST=[],rateStars=0;
+const saveAuth=()=>{AUTH?localStorage.setItem('rahasi_auth',JSON.stringify(AUTH)):localStorage.removeItem('rahasi_auth');renderHeader();renderDrawerProf()};
+const isFav=n=>FAVS.includes(n);
+function toggleFav(n){FAVS=isFav(n)?FAVS.filter(x=>x!==n):[...FAVS,n];try{localStorage.setItem('rahasi_favs',JSON.stringify(FAVS))}catch(e){};renderGrid();renderChips()}
+function pushRecent(n){RECENT=[n,...RECENT.filter(x=>x!==n)].slice(0,6);try{localStorage.setItem('rahasi_recent',JSON.stringify(RECENT))}catch(e){};renderChips()}
+
+async function api(p,opt={}){
+  const r=await fetch(API+p,{...opt,headers:{'Content-Type':'application/json',...(AUTH?{Authorization:'Bearer '+AUTH.token}:{}),...(opt.headers||{})}});
+  const d=await r.json().catch(()=>({}));
+  if(!r.ok){if(r.status===401){AUTH=null;saveAuth();openAuth();}throw new Error(d.error||'Request failed');}
+  return d;
+}
+function toast(msg){const t=document.createElement('div');t.className='toast';t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),5000)}
+function openM(id){closeAll();$(id).classList.add('on');$('#veil').classList.add('on')}
+function closeAll(){document.querySelectorAll('.modal').forEach(m=>m.classList.remove('on'));$('#drawer').classList.remove('on');$('#veil').classList.remove('on')}
+function askConfirm(title,html,ok='Confirm'){return new Promise(res=>{openM('#askM');$('#askTitle').textContent=title;$('#askBody').innerHTML=html;$('#askOk').textContent=ok;$('#askOk').onclick=()=>{closeAll();res(true)};$('#askNo').onclick=()=>{closeAll();res(false)}})}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAll()});
+
+/* drawer */
+function openDrawer(){renderDrawerProf();$('#drawer').classList.add('on');$('#veil').classList.add('on')}
+function renderDrawerProf(){
+  const p=$('#drawerProf'),lg=$('#drawerLogout');
+  if(AUTH){lg.hidden=false;p.innerHTML=`<div class="nm">${escX(AUTH.user.name)}${AUTH.user.verified?' <span class="w" title="Phone verified via M-Pesa">✅</span>':''}</div><div class="ph">${escX(AUTH.user.phone)}</div><div class="bl">KSh ${AUTH.user.balance.toFixed(2)}</div>`}
+  else{lg.hidden=true;p.innerHTML=`<div class="nm">Welcome 👋</div><div class="ph">Create an account to use the wallet</div><button class="bigbtn" style="margin-top:9px" onclick="openAuth()">Create account / Login</button>`}
+}
+document.querySelectorAll('.drawer .dit, .trust .vbtn').forEach(b=>b.onclick=()=>{
+  const a=b.dataset.a;closeAll();
+  ({wallet:()=>openWallet('home'),deposit:()=>openWallet('deposit'),withdraw:()=>openWallet('withdraw'),
+    requests:()=>openWallet('requests'),verify:openVerify,ai:openAi,support:()=>openM('#supM'),
+    refer:()=>{$('#referSec').scrollIntoView({behavior:'smooth'});$('#refName').focus()},
+    rate:()=>openRate(''),about:()=>openM('#abtM'),logout:doLogout,share:shareSite})[a]?.();
+});
+
+/* header / profile */
+function renderHeader(){
+  $('#walTopBtn').hidden=!CFG.walletEnabled;
+  $('#profBtn').textContent=AUTH?AUTH.user.name[0].toUpperCase():'👤';
+  $('#profBtn').className=AUTH?'avatar':'avatar g';
+}
+function openAuth(){openM('#authM');$('#tabReg').click()}
+ $('#profBtn').onclick=()=>{if(!API||!CFG.walletEnabled)return AUTH?openDrawer():openAuth();AUTH?openProfile():openAuth()};
+ $('#menuBtn').onclick=openDrawer;
+ $('#drawerClose').onclick=closeAll;
+ $('#walTopBtn').onclick=()=>openWallet('home');
+ $('#heroWallet').onclick=()=>CFG.walletEnabled?openWallet('home'):(API?openAuth():toast('Wallet is being set up — pay via M-Pesa for now'));
+function openProfile(){
+  openM('#profM');
+  $('#profBox').innerHTML=`<button class="mclose" onclick="closeAll()">✕</button>
+    <h2>👤 ${escX(AUTH.user.name)}${AUTH.user.verified?' <span class="w">✅</span>':''}</h2>
+    <p class="sub">${escX(AUTH.user.phone)}${AUTH.user.verified?' · phone verified':' · verify by making your first deposit'}</p>
+    <div class="walbal">KSh ${AUTH.user.balance.toFixed(2)}</div><div class="walsub">wallet balance</div>
+    <div class="walbtns"><button class="bigbtn" onclick="renderWallet('deposit')">＋ Deposit</button>
+    <button class="bigbtn ghost" onclick="renderWallet('withdraw')">↩ Withdraw</button></div>
+    <button class="bigbtn ghost" style="margin-bottom:9px" onclick="renderWallet('requests')">🧾 My requests & receipts</button>
+    <button class="bigbtn ghost" style="margin-bottom:9px" onclick="openPinForm()">🔑 Change app PIN</button>
+    <div id="pinForm" hidden>
+      <div class="fld"><label>Current PIN</label><input id="pinOld" type="password" inputmode="numeric" maxlength="4"></div>
+      <div class="fld"><label>New PIN (4 digits)</label><input id="pinNew" type="password" inputmode="numeric" maxlength="4"></div>
+      <div class="ferr" id="pinErr"></div>
+      <button class="bigbtn" id="pinGo" style="margin-bottom:9px">Save new PIN</button>
+    </div>
+    <button class="bigbtn danger" onclick="deleteAccount()">🗑 Delete my account & data</button>
+    <p style="font-size:11px;color:var(--dim);margin:8px 0 0">Deletes your profile, balance, requests and history from our servers permanently (Data Protection Act right). Withdraw your balance first if you still have money in the wallet.</p>`;
+  $('#pinGo').onclick=async()=>{
+    try{const d=await api('/auth/change-pin',{method:'POST',body:JSON.stringify({old:$('#pinOld').value,pin:$('#pinNew').value})});
+      AUTH.token=d.token;saveAuth();toast('PIN changed ✅');$('#pinForm').hidden=true}
+    catch(e){$('#pinErr').textContent=e.message}};
+}
+function openPinForm(){$('#pinForm').hidden=false}
+async function deleteAccount(){
+  const ok=await askConfirm('Delete account?',`This permanently deletes your profile, wallet balance (<b>KSh ${AUTH.user.balance.toFixed(0)}</b>), requests and history. This cannot be undone.`,'Delete everything');
+  if(!ok)return;
+  try{await api('/auth/delete',{method:'POST'});AUTH=null;saveAuth();closeAll();toast('Account deleted. Goodbye 👋')}catch(e){toast(e.message)}
+}
+async function doLogout(){try{await api('/auth/logout',{method:'POST'})}catch(e){}AUTH=null;saveAuth();closeAll();toast('Logged out')}
+
+/* auth */
+ $('#tabReg').onclick=()=>{$('#tabReg').classList.add('on');$('#tabLog').classList.remove('on');$('#regForm').hidden=false;$('#logForm').hidden=true};
+ $('#tabLog').onclick=()=>{$('#tabLog').classList.add('on');$('#tabReg').classList.remove('on');$('#logForm').hidden=false;$('#regForm').hidden=true};
+ $('#regGo').onclick=async()=>{$('#regErr').textContent='';try{const d=await api('/auth/register',{method:'POST',body:JSON.stringify({name:$('#rName').value,phone:$('#rPhone').value,pin:$('#rPin').value})});AUTH={token:d.token,user:d.user};saveAuth();closeAll();toast('Account created ✅ — deposit to use your wallet')}catch(e){$('#regErr').textContent=e.message}};
+ $('#logGo').onclick=async()=>{$('#logErr').textContent='';try{const d=await api('/auth/login',{method:'POST',body:JSON.stringify({phone:$('#lPhone').value,pin:$('#lPin').value})});AUTH={token:d.token,user:d.user};saveAuth();closeAll();toast('Welcome back, '+d.user.name.split(' ')[0]+' 👋')}catch(e){$('#logErr').textContent=e.message}};
+async function refreshMe(){if(!AUTH)return null;try{const d=await api('/me');AUTH.user=d.user;saveAuth();return d.ledger}catch(e){return null}}
+
+/* wallet */
+function openWallet(section){
+  if(!AUTH)return openAuth();
+  if(!CFG.walletEnabled)return toast('Wallet is being set up — pay via M-Pesa for now');
+  openM('#walM');renderWallet(section||'home');
+}
+const walletOpen=()=>$('#walM').classList.contains('on');
+function renderWallet(section){
+  const box=$('#walBox');if(!AUTH)return;
+  if(section==='home'){
+    box.innerHTML=`<button class="mclose" onclick="closeAll()">✕</button>
+      <h2>💼 My wallet</h2><p class="sub">${escX(AUTH.user.name)}${AUTH.user.verified?' ✅':''} · ${escX(AUTH.user.phone)}</p>
+      <div class="walbal">KSh ${AUTH.user.balance.toFixed(2)}</div>
+      <div class="walsub">Use for any service · leftover stays for next time · withdraw anytime (min KSh ${CFG.minWithdraw})</div>
+      <div id="dashRow"></div>
+      <div class="walbtns"><button class="bigbtn" onclick="renderWallet('deposit')">＋ Deposit</button>
+      <button class="bigbtn ghost" onclick="renderWallet('withdraw')">↩ Withdraw</button></div>
+      <div class="mini-h">RECENT ACTIVITY</div><div id="walLedg"><div class="empty">Loading…</div></div>
+      <button class="bigbtn ghost" style="margin-top:14px" onclick="renderWallet('requests')">🧾 My service requests</button>
+      <button class="bigbtn ghost" style="margin-top:9px" onclick="doLogout()">Log out</button>`;
+    refreshMe().then(ledg=>{
+      const el=$('#walLedg');if(!el)return;
+      el.innerHTML=(ledg&&ledg.length)?ledg.slice(0,8).map(l=>{
+        const pos=l.delta>0,label={deposit:'Deposit',service:'Service',withdraw_pending:'Withdrawal (pending)',refund:'Refund'}[l.kind]||l.kind;
+        return `<div class="trow"><span>${label}<br><small style="color:var(--dim)">${new Date(l.t).toLocaleDateString()} ${l.ref?'· '+escX(l.ref):''}</small></span><span class="${pos?'w':'l'}">${pos?'+':''}KSh ${l.delta.toFixed(0)}</span><span style="color:var(--dim)">bal ${l.balanceAfter.toFixed(0)}</span></div>`}).join(''):'<div class="empty">No activity yet</div>';
+      const dash=$('#dashRow');
+      if(dash){const svc=(ledg||[]).filter(l=>l.kind==='service');
+        if(svc.length){const spent=Math.abs(svc.reduce((s,l)=>s+l.delta,0));
+          dash.innerHTML=`<div class="mini-h">MY DASHBOARD</div>
+          <div class="stat" style="text-align:left;padding:12px 14px">
+            <b style="font-size:14px;color:var(--text)">KSh ${spent.toFixed(0)} spent · ${svc.length} service${svc.length>1?'s':''} paid</b>
+            <span style="display:block;margin-top:3px">from your recent activity${AUTH.user.verified?' · <span class="w">✅ verified member</span>':''}</span>
+          </div>`;}
+      }
+    });
+  }
+  else if(section==='deposit'){
+    box.innerHTML=`<button class="mclose" onclick="renderWallet('home')">←</button>
+      <h2>＋ Deposit via M-Pesa</h2><p class="sub">An STK push pops on your phone — enter your M-Pesa PIN there. Minimum KSh ${CFG.minDeposit}.</p>
+      <div class="fld"><label>Amount (KSh)</label><input id="depAmt" type="number" min="${CFG.minDeposit}" value="200"></div>
+      <div class="ferr" id="depErr"></div>
+      <button class="bigbtn" id="depGo">Send STK push</button>
+      <div id="depWait" style="display:none;text-align:center;padding:14px 0"><span class="spin"></span><p style="font-size:13px;color:var(--mut);margin-top:8px">Waiting for your M-Pesa PIN…<br>Balance updates automatically once paid.</p></div>`;
+    $('#depGo').onclick=async()=>{$('#depErr').textContent='';$('#depGo').disabled=true;
+      try{const d=await api('/wallet/deposit',{method:'POST',body:JSON.stringify({amount:+$('#depAmt').value})});$('#depGo').style.display='none';$('#depWait').style.display='block';pollDeposit(d.depositId)}
+      catch(e){$('#depErr').textContent=e.message;$('#depGo').disabled=false}};
+  }
+  else if(section==='withdraw'){
+    box.innerHTML=`<button class="mclose" onclick="renderWallet('home')">←</button>
+      <h2>↩ Withdraw to M-Pesa</h2><p class="sub">Paid to ${escX(AUTH.user.phone)} within 24 hours. Minimum KSh ${CFG.minWithdraw}.</p>
+      <div class="fld"><label>Amount (KSh) — balance KSh ${AUTH.user.balance.toFixed(0)}</label><input id="wdAmt" type="number" min="${CFG.minWithdraw}"></div>
+      <div class="ferr" id="wdErr"></div>
+      <button class="bigbtn" id="wdGo">Request withdrawal</button>
+      <div class="mini-h">MY WITHDRAWALS</div><div id="wdList"><div class="empty">Loading…</div></div>`;
+    api('/wallet/withdrawals').then(ws=>{const el=$('#wdList');if(!el)return;
+      el.innerHTML=ws.length?ws.map(w=>`<div class="trow"><span>${w.id}<br><small style="color:var(--dim)">${new Date(w.t).toLocaleString()}</small></span><span>KSh ${w.amount}</span><span class="${w.status==='paid'?'w':'g'}">${w.status}</span></div>`).join(''):'<div class="empty">None yet</div>'}).catch(()=>{});
+    $('#wdGo').onclick=async()=>{$('#wdErr').textContent='';
+      try{const ok=await askConfirm('Confirm withdrawal',`Send <b>KSh ${$('#wdAmt').value}</b> to <b>${escX(AUTH.user.phone)}</b> within 24 hours?`,'Yes, withdraw');if(!ok)return renderWallet('withdraw');
+      const d=await api('/wallet/withdraw',{method:'POST',body:JSON.stringify({amount:+$('#wdAmt').value})});await refreshMe();renderWallet('home');toast(d.message)}
+      catch(e){$('#wdErr').textContent=e.message}};
+  }
+  else if(section==='requests'){
+    box.innerHTML=`<button class="mclose" onclick="renderWallet('home')">←</button>
+      <h2>🧾 My requests & receipts</h2>
+      <p class="sub">Quote any receipt ID on WhatsApp, or verify it on the home page. Statuses: <span class="g">new</span> → <span class="g">in progress</span> → <span class="w">done</span>.</p>
+      <div id="rqList"><div class="empty">Loading…</div></div>`;
+    api('/services/requests').then(rs=>{const el=$('#rqList');if(!el)return;
+      el.innerHTML=rs.length?rs.map(r=>{const s=SVC_BY_NAME[r.name];
+        return `<div class="trow"><span><b>${escX(r.name)}</b><br><small style="color:var(--dim)">${escX(r.id)} · ${new Date(r.t).toLocaleDateString()}</small></span><span>KSh ${r.price}</span><span class="g">${escX(r.status)}</span>${s?`<button class="repbtn" data-rep="${escX(r.name)}">↻ Again</button>`:''}</div>`}).join(''):'<div class="empty">No requests yet</div>';
+      el.querySelectorAll('[data-rep]').forEach(b=>b.onclick=()=>{closeAll();requestService(SVC_BY_NAME[b.dataset.rep])});
+    }).catch(()=>{});
+  }
+}
+function pollDeposit(depId){let tries=0;const t=setInterval(async()=>{tries++;
+  try{const d=await api('/wallet/deposit/'+depId);
+    if(d.status==='paid'){clearInterval(t);await refreshMe();
+      toast('Deposit confirmed ✅ Balance: KSh '+AUTH.user.balance.toFixed(0));
+      if(walletOpen())renderWallet('home')}
+    else if(tries>40){clearInterval(t);toast('Still waiting for M-Pesa — balance updates automatically once you enter the PIN')}
+  }catch(e){}},3000)}
+
+/* verify receipt (public) */
+function openVerify(){
+  openM('#verM');
+  $('#verBox').innerHTML=`<button class="mclose" onclick="closeAll()">✕</button>
+    <h2>🔍 Verify a receipt</h2>
+    <p class="sub">Anyone can check a payment here — no login needed. Ask anyone who recommends us for their receipt ID and see it for yourself.</p>
+    <div class="fld"><label>Receipt ID (e.g. RQ-XXXXXX)</label><input id="verId" placeholder="RQ-…" autocapitalize="characters"></div>
+    <button class="bigbtn" id="verGo">Verify</button>
+    <div id="verOut"></div>`;
+  $('#verGo').onclick=async()=>{
+    const v=$('#verId').value.trim();const out=$('#verOut');
+    if(!v)return;
+    if(!API){out.innerHTML='<div class="verbox bad">Receipt verification activates once the owner connects the backend.</div>';return}
+    out.innerHTML='<div style="text-align:center;padding:10px"><span class="spin"></span></div>';
+    try{const d=await api('/verify/'+encodeURIComponent(v));
+      out.innerHTML=`<div class="verbox ok">✅ <b>${escX(d.id)}</b><br>Service: <b>${escX(d.service)}</b><br>Amount: KSh ${d.price}<br>Status: <b class="w">${escX(d.status)}</b><br>Date: ${new Date(d.date).toLocaleString()}</div>`}
+    catch(e){out.innerHTML=`<div class="verbox bad">❌ ${escX(e.message)}<br><small style="color:var(--dim)">Double-check the ID, or ask us on WhatsApp.</small></div>`}
+  };
+}
+
+/* ratings */
+async function loadRatings(){if(!API)return;try{RATINGS=await api('/ratings');renderStats();renderGrid()}catch(e){}}
+function avgOf(name){const r=RATINGS.filter(x=>x.service===name);if(!r.length)return null;const avg=r.reduce((s,x)=>s+x.stars,0)/r.length;return{avg:Math.round(avg),txt:avg.toFixed(1),n:r.length}}
+function renderStats(){
+  $('#stSvc').textContent=SERVICES.length+'+';
+  if(RATINGS.length){const a=RATINGS.reduce((s,x)=>s+x.stars,0)/RATINGS.length;$('#stRate').textContent=a.toFixed(1)+'★';$('#stRat').textContent=RATINGS.length}
+  else{$('#stRate').textContent='New';$('#stRat').textContent='0'}
+}
+function openRate(name){
+  openM('#rateM');
+  $('#rateSvc').textContent=name?`You're rating: ${name} — you can change it below.`:'Pick the service you used (must match the name on the card).';
+  $('#ratePick').value=name||'';
+  document.querySelectorAll('#starPick span').forEach(x=>x.classList.remove('on'));rateStars=0;$('#rateErr').textContent='';
+}
+document.querySelectorAll('#starPick span').forEach((sp,i)=>{sp.onclick=()=>{rateStars=i+1;document.querySelectorAll('#starPick span').forEach((x,j)=>x.classList.toggle('on',j<=i))}});
+ $('#rateGo').onclick=async()=>{
+  if(!API)return $('#rateErr').textContent='Ratings activate once the backend is connected.';
+  const svc=$('#ratePick').value.trim();
+  if(!svc)return $('#rateErr').textContent='Choose the service first';
+  if(!rateStars)return $('#rateErr').textContent='Tap the stars first';
+  try{await api('/ratings',{method:'POST',body:JSON.stringify({service:svc,stars:rateStars,name:$('#rateName').value,comment:$('#rateComment').value})});closeAll();await loadRatings();toast('Thanks for rating ⭐')}
+  catch(e){$('#rateErr').textContent=e.message}
+};
+
+/* AI */
+function aiFind(q){const words=q.toLowerCase().split(/\W+/).filter(w=>w.length>2);const exp=new Set(words);
+  words.forEach(w=>{if(AI_SYN[w])AI_SYN[w].split(' ').forEach(x=>exp.add(x))});
+  return SERVICES.map(s=>{const hay=(s.name+' '+s.d+' '+s.cat).toLowerCase();let sc=0;exp.forEach(w=>{if(hay.includes(w))sc+=w.length>4?2:1});return{s,sc}}).filter(x=>x.sc>0).sort((a,b)=>b.sc-a.sc).slice(0,4).map(x=>x.s)}
+function aiSay(text,html){const c=$('#aiChat');const m=document.createElement('div');m.className='msg '+(html?'bot':'me');if(html)m.innerHTML=html;else m.textContent=text;c.appendChild(m);c.scrollTop=c.scrollHeight}
+function openAi(){openM('#aiM');if(!$('#aiChat').children.length)aiSay(null,'Describe what you need — e.g. "I want to apply for HELB" or "I lost my KRA PIN". Nothing you type leaves your phone.')}
+function aiAsk(){const q=$('#aiIn').value.trim();if(!q)return;aiSay(q);$('#aiIn').value='';
+  setTimeout(()=>{const hits=aiFind(q);
+    if(hits.length){aiSay(null,'Top matches:');hits.forEach(s=>{const row=document.createElement('div');row.className='airow';
+      row.innerHTML=`<b>${escX(s.name)}</b><span class="mono">KSh ${s.price}</span>`;
+      const b=document.createElement('button');b.textContent='Request';b.onclick=()=>{closeAll();requestService(s)};row.appendChild(b);$('#aiChat').appendChild(row)})}
+    else{aiSay(null,'No match — but we handle far more than we list. Ask a human:');
+      const b=document.createElement('button');b.className='bigbtn wa';b.textContent='💬 Continue on WhatsApp';
+      b.onclick=()=>window.open(waLink('Hello! Your site helper could not match: "'+q+'". Do you handle this? Details: '),'_blank');$('#aiChat').appendChild(b)}
+    $('#aiChat').scrollTop=1e6;},300)}
+ $('#aiGo').onclick=aiAsk;$('#aiIn').addEventListener('keydown',e=>{if(e.key==='Enter')aiAsk()});
+ $('#aiFab').onclick=openAi;
+
+/* pay-first flow */
+function requestService(s){
+  if(API&&CFG.walletEnabled&&AUTH){
+    if(AUTH.user.balance>=s.price)return payFromWallet(s);
+    return (async()=>{const ok=await askConfirm('Balance too low',`This service costs <b>KSh ${s.price}</b> but your wallet has <b>KSh ${AUTH.user.balance.toFixed(0)}</b>.<br><br>Deposit first, or request via WhatsApp and pay after confirmation?`,'Deposit now');
+      if(ok)openWallet('deposit');else waRequest(s)})();
+  }
+  waRequest(s);
+}
+function waRequest(s){
+  const ref=localStorage.getItem('rahasi_ref');
+  const msg=`Hello Rahisi Services! I'd like to request the *${s.name}* service (KSh ${s.price})${ref?`. I was referred by *${ref}* — KSh ${CONFIG.REFERRAL_DISCOUNT} off please`:''}. Please tell me what you need from me.`;
+  window.open(waLink(msg),'_blank');
+}
+async function payFromWallet(s){
+  const ok=await askConfirm('Pay from wallet',`<b>${escX(s.name)}</b><br>Price: <b>KSh ${s.price}</b><br>Balance after: <b>KSh ${(AUTH.user.balance-s.price).toFixed(0)}</b><br><br>Payment is instant and you'll get a receipt ID. We then confirm on WhatsApp.`,'Pay now');
+  if(!ok)return;
+  try{
+    const d=await api('/services/request',{method:'POST',body:JSON.stringify({name:s.name,price:s.price})});
+    AUTH.user.balance=d.balance;saveAuth();
+    toast('Paid ✅ Receipt '+d.requestId+' — opening WhatsApp…');
+    window.open(waLink(`Hello Rahisi Services! I have ALREADY PAID *KSh ${s.price}* from my wallet for *${s.name}*.\n\n*Receipt ID: ${d.requestId}*\n(Payment is recorded on your system — please verify and start my task.)\n\nMy name: ${escX(AUTH.user.name)}\nWhat I need you to do:`),'_blank');
+  }catch(e){toast(e.message)}
+}
+
+/* service detail modal */
+function openDetail(s){
+  const a=avgOf(s.name);
+  const reqs=s.req||CAT_REQ[s.cat]||['We\'ll confirm the exact requirements with you on WhatsApp'];
+  pushRecent(s.name);
+  openM('#detM');
+  $('#detBox').innerHTML=`<button class="mclose" onclick="closeAll()">✕</button>
+    <div style="font-size:34px">${s.ico}</div>
+    <h2>${escX(s.name)}</h2>
+    <p class="sub">${escX(s.cat)} · turnaround: ${escX(s.eta)} · ${a?`<span class="stars">${'★'.repeat(a.avg)}</span> ${a.txt} (${a.n} rating${a.n>1?'s':''})`:'No ratings yet'}</p>
+    <p style="font-size:13.5px;color:var(--mut);line-height:1.65">${escX(s.d)}</p>
+    <b style="font-size:13px">What we need from you:</b>
+    <ul class="requl">${reqs.map(r=>`<li>${escX(r)}</li>`).join('')}</ul>
+    <p style="font-size:12px;color:var(--dim);margin:0 0 12px">Price: <b class="mono" style="color:var(--acc)">KSh ${s.price}</b> — nothing is charged before you confirm. Exact details are confirmed on WhatsApp before we start.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px">
+      <button class="bigbtn ghost" onclick="toggleFav(${JSON.stringify(s.name).replace(/"/g,'&quot;')});closeAll()">${isFav(s.name)?'💔 Unsave':'❤️ Save'}</button>
+      <button class="bigbtn" onclick="closeAll();requestService(SVC_BY_NAME[${JSON.stringify(s.name).replace(/"/g,'&quot;')}])">Request · KSh ${s.price}</button>
+    </div>
+    <button class="bigbtn ghost" style="margin-top:9px" onclick="shareService(${JSON.stringify(s.name).replace(/"/g,'&quot;')})">📤 Share this service</button>`;
+}
+function shareService(name){
+  const s=SVC_BY_NAME[name];if(!s)return;
+  const txt=`${s.ico} ${s.name} — KSh ${s.price} (ready in ${s.eta}) via Rahisi Services. Details: ${location.origin}${location.pathname}`;
+  navigator.share?navigator.share({title:s.name,text:txt}).catch(()=>{}):window.open(waLink(txt),'_blank');
+}
+
+/* grid */
+function card(s,i){const a=avgOf(s.name);
+  return `<div class="svc">
+    <div class="top"><span class="ico">${s.ico}</span>
+      <button class="favbtn ${isFav(s.name)?'on':''}" data-act="fav" data-i="${i}" title="Save for later">${isFav(s.name)?'❤️':'🤍'}</button>
+      <span class="eta">${s.eta}</span></div>
+    <b class="svcname" data-act="detail" data-i="${i}" title="See details & requirements">${s.pop?'<span class="stars">⭐</span> ':''}${escX(s.name)}</b>
+    <div class="d">${escX(s.d)}</div>
+    <div class="ratebar">${a?`<span class="stars">${'★'.repeat(a.avg)}${'☆'.repeat(5-a.avg)} <small>${a.txt} (${a.n})</small></span>`:'<span class="stars" style="opacity:.5"><small>No ratings yet</small></span>'}<button class="ratebtn" data-act="rate" data-i="${i}">Rate</button></div>
+    <div class="row"><span class="price">KSh ${s.price}</span>
+    <button class="go" data-act="request" data-i="${i}">Request service</button></div>
+  </div>`}
+const sortFn=()=>SORT==='lo'?(a,b)=>a.price-b.price:SORT==='hi'?(a,b)=>b.price-a.price:SORT==='az'?(a,b)=>a.name.localeCompare(b.name):(a,b)=>(b.pop?1:0)-(a.pop?1:0);
+function noRes(q){return `<div class="nores"><b>No match for “${escX(q)}”</b><p>That doesn't mean we can't do it — ask us directly:</p><button onclick="askUnmatched(${JSON.stringify(q).replace(/"/g,'&quot;')})">💬 Ask on WhatsApp</button></div>`}
+function askUnmatched(q){window.open(waLink(`Hello Rahisi Services! I searched for "*${q}*" but didn't find it. Do you handle this? Details: `),'_blank')}
+function renderGrid(){
+  const q=$('#q').value.trim(),grid=$('#grid');
+  if(q){
+    CUR_LIST=SERVICES.filter(s=>(s.name+' '+s.d+' '+s.cat).toLowerCase().includes(q.toLowerCase())).sort(sortFn());
+    grid.innerHTML=CUR_LIST.length?`<div class="count">${CUR_LIST.length} result${CUR_LIST.length>1?'s':''} for “${escX(q)}”</div><div class="grid">${CUR_LIST.map(card).join('')}</div>`:noRes(q);
+    return;
+  }
+  if(curCat==='Saved'){CUR_LIST=SERVICES.filter(s=>isFav(s.name)).sort(sortFn());
+    grid.innerHTML=CUR_LIST.length?`<div class="count">${CUR_LIST.length} saved service${CUR_LIST.length>1?'s':''}</div><div class="grid">${CUR_LIST.map(card).join('')}</div>`:`<div class="nores"><b>No saved services yet</b><p>Tap the 🤍 heart on any service to save it here — handy for monthly tasks like KRA returns.</p></div>`;
+    return}
+  if(curCat==='Recent'){CUR_LIST=RECENT.map(n=>SVC_BY_NAME[n]).filter(Boolean);
+    grid.innerHTML=CUR_LIST.length?`<div class="count">Recently viewed</div><div class="grid">${CUR_LIST.map(card).join('')}</div>`:`<div class="nores"><b>Nothing here yet</b><p>Services you open will appear here for quick access.</p></div>`;
+    return}
+  if(curCat==='All'){
+    const pops=[...SERVICES.filter(s=>s.pop)].sort(sortFn()),rest=[...SERVICES.filter(s=>!s.pop)].sort(sortFn());
+    CUR_LIST=[...pops,...rest];
+    grid.innerHTML=`<div class="shead">⭐ Most requested</div><div class="grid">${pops.map((s,i)=>card(s,i)).join('')}</div>
+    <div class="shead">All services (${rest.length})</div><div class="grid">${rest.map((s,i)=>card(s,pops.length+i)).join('')}</div>`;
+  }else{
+    CUR_LIST=SERVICES.filter(s=>s.cat===curCat).sort(sortFn());
+    grid.innerHTML=`<div class="count">${CUR_LIST.length} service${CUR_LIST.length>1?'s':''} in ${escX(curCat)}</div><div class="grid">${CUR_LIST.map(card).join('')}</div>`;
+  }
+}
+ $('#grid').addEventListener('click',e=>{
+  const b=e.target.closest('[data-act]');if(!b)return;
+  const s=CUR_LIST[+b.dataset.i];if(!s)return;
+  ({request:()=>requestService(s),rate:()=>openRate(s.name),fav:()=>toggleFav(s.name),detail:()=>openDetail(s)})[b.dataset.act]?.();
+});
+let qT=null;
+ $('#q').addEventListener('input',()=>{clearTimeout(qT);qT=setTimeout(()=>{$('#qClr').hidden=!$('#q').value;renderGrid()},150)});
+ $('#qClr').onclick=()=>{$('#q').value='';$('#qClr').hidden=true;renderGrid()};
+ $('#sortSel').onchange=e=>{SORT=e.target.value;renderGrid()};
+function renderChips(){
+  const cats=['All',...(FAVS.length?['Saved']:[]),...(RECENT.length?['Recent']:[]),...CATS.slice(1)];
+  const cnt=c=>c==='All'?SERVICES.length:c==='Saved'?FAVS.length:c==='Recent'?RECENT.length:SERVICES.filter(s=>s.cat===c).length;
+  $('#chips').innerHTML=cats.map(c=>`<button data-c="${c}" class="${c===curCat?'on':''}">${c==='All'?'All':c} · ${cnt(c)}</button>`).join('');
+  $('#chips').querySelectorAll('button').forEach(b=>b.onclick=()=>{curCat=b.dataset.c;$('#q').value='';$('#qClr').hidden=true;renderChips();renderGrid()});
+}
+const QUICK=['HELB','good conduct','passport','KRA PIN','CRB','birth certificate','logbook','bursary','logo','SHA'];
+ $('#qChips').innerHTML=QUICK.map(q=>`<button data-q="${q}">${q}</button>`).join('');
+ $('#qChips').querySelectorAll('button').forEach(b=>b.onclick=()=>{$('#q').value=b.dataset.q;$('#qClr').hidden=false;renderGrid()});
+
+function renderPay(){$('#mpName').textContent=mpesaNamed?CONFIG.MPESA_NAME:'⚠️ set name in CONFIG';$('#mpNo').textContent=CONFIG.MPESA_NUMBER;$('#mpTill').textContent=CONFIG.MPESA_TILL}
+
+/* referral + share */
+function makeRef(){const name=$('#refName').value.trim();if(name.length<2)return toast('Type your name first');
+  localStorage.setItem('rahasi_ref',name);
+  const msg=`Hi! I use *Rahisi Services* for KRA, SHA, eCitizen, HELB and ${SERVICES.length}+ other tasks — all done on WhatsApp or paid from a wallet in one tap. Use my name *"${name}"* and get *KSh ${CONFIG.REFERRAL_DISCOUNT} off*: ${location.origin}${location.pathname}?ref=${encodeURIComponent(name)}`;
+  $('#refOut').innerHTML=`<div class="code">RAHISI-${name.replace(/\s+/g,'').toUpperCase().slice(0,8)}</div><div class="rrow" style="margin-top:10px">
+    <button onclick="shareRef(${JSON.stringify(msg).replace(/"/g,'&quot;')})">📤 Share</button>
+    <button onclick="copyRef(${JSON.stringify(msg).replace(/"/g,'&quot;')})">📋 Copy</button></div>`}
+function shareRef(msg){navigator.share?navigator.share({title:'Rahisi Services',text:msg}).catch(()=>{}):window.open(waLink(msg),'_blank')}
+function copyRef(msg){(navigator.clipboard?navigator.clipboard.writeText(msg):Promise.reject()).then(()=>toast('Copied 👌')).catch(()=>toast('Use the share button instead'))}
+function shareSite(){
+  const txt=`Rahisi Services — KRA, SHA, HELB, eCitizen + ${SERVICES.length} services done for you, with receipts. ${location.origin}${location.pathname}`;
+  navigator.share?navigator.share({title:'Rahisi Services',text:txt}).catch(()=>{}):copyRef(txt);
+}
+
+/* bottom nav */
+ $('#bnHome').onclick=()=>{window.scrollTo({top:0,behavior:'smooth'});setBn('#bnHome')};
+ $('#bnWallet').onclick=()=>{setBn('#bnWallet');CFG.walletEnabled?openWallet('home'):(API?openAuth():toast('Wallet coming soon — pay via M-Pesa for now'))};
+ $('#bnAi').onclick=()=>{setBn('#bnAi');openAi()};
+ $('#bnSup').onclick=()=>{setBn('#bnSup');openM('#supM')};
+function setBn(id){['#bnHome','#bnWallet','#bnAi','#bnSup'].forEach(x=>$(x).classList.toggle('on',x===id))}
+
+/* wiring */
+window.closeAll=closeAll;window.renderWallet=renderWallet;window.requestService=requestService;
+window.openAuth=openAuth;window.doLogout=doLogout;window.openWallet=openWallet;window.openAi=openAi;
+window.openPinForm=openPinForm;window.deleteAccount=deleteAccount;window.toggleFav=toggleFav;
+window.SVC_BY_NAME=SVC_BY_NAME;window.askUnmatched=askUnmatched;window.shareRef=shareRef;window.copyRef=copyRef;
+window.shareService=shareService;
+ $('#refMake').onclick=makeRef;
+ $('#veil').onclick=closeAll;
+document.querySelectorAll('#supM .tlist button').forEach(b=>b.onclick=()=>{window.open(waLink(b.dataset.t),'_blank');closeAll()});
+ $('#waHero').href=$('#waFab').href=waLink('Hello Rahisi Services! I need help with: ');
+ $('#commWa').href=$('#drWa').href=CONFIG.WHATSAPP_GROUP;
+ $('#commTg').href=$('#drTg').href=CONFIG.TELEGRAM;
+ $('#yr').textContent=new Date().getFullYear();
+
+(async function boot(){
+  /* referral via ?ref= link — auto-capture so shared links credit the referrer */
+  try{
+    const rp=new URLSearchParams(location.search).get('ref');
+    if(rp&&rp.length>=2&&!localStorage.getItem('rahasi_ref')){
+      localStorage.setItem('rahasi_ref',rp);
+      setTimeout(()=>toast(`🎁 Referred by ${rp} — KSh ${CONFIG.REFERRAL_DISCOUNT} off your first service!`),1200);
+    }
+  }catch(e){}
+  $('#svcList').innerHTML=SERVICES.map(s=>`<option value="${escX(s.name)}">`).join('');
+  renderChips();renderGrid();renderPay();renderHeader();renderDrawerProf();
+  $('#stSvc').textContent=SERVICES.length+'+';
+  if(!API){setTimeout(()=>toast('Owner: set API_URL in CONFIG to enable wallet, ratings & receipts.'),2000);return}
+  try{
+    CFG={...CFG,...await api('/config')};
+    if(CFG.banner)$('#strip').innerHTML=CFG.banner;   /* admin-controlled announcement */
+    renderHeader();await loadRatings();if(AUTH)refreshMe();
+  }catch(e){toast('Backend waking up… (free Render tier sleeps ~50s)')}
+})();
+</script>
+</body>
+</html>
