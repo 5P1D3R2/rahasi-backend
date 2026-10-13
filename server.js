@@ -10,8 +10,7 @@ app.use(express.json({ limit: '5mb' }));
 app.use(express.urlencoded({ extended: false }));
 
 /* ═══ PERSISTENT STORAGE — Neon Postgres (free) — survives redeploys ═══
-   Set DATABASE_URL in Render env vars. Whole app state lives as one JSONB
-   document; app logic below is untouched. */
+   Requires DATABASE_URL in Render env vars. App state lives as one JSONB doc. */
 const pool = new Pool({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } });
 const EMPTY = { users: [], sessions: [], ledger: [], deposits: [], withdrawals: [],
                 requests: [], ratings: [], promos: [], settings: { banner: '' } };
@@ -48,8 +47,12 @@ function save() {
 
 const newId = () => crypto.randomBytes(6).toString('hex').toUpperCase();
 
-/* ── config ── */
+/* ── config ──
+   Required env vars: ADMIN_KEY, DATABASE_URL, TINYPESA_API_KEY (the LINK key),
+   TINYPESA_USERNAME (e.g. Amspider), TINYPESA_TARGET (your link name).
+   Wallet auto-enables when TINYPESA_API_KEY + ADMIN_KEY are both present. */
 const TINYPESA_KEY = process.env.TINYPESA_API_KEY || '';
+const TINYPESA_USERNAME = process.env.TINYPESA_USERNAME || '';
 const ADMIN_KEY = process.env.ADMIN_KEY || '';
 const WALLET_ENABLED = !!(TINYPESA_KEY && ADMIN_KEY);
 const MIN_DEPOSIT = 50, MIN_WITHDRAW = 100, MIN_PRICE = 250, MAX_PRICE = 20000;
@@ -140,9 +143,7 @@ app.post('/auth/delete', auth, (req, res) => {
   save(); res.json({ ok: true });
 });
 
-/* ═══ DEPOSITS (TinyPesa STK push) ═══
-   If TinyPesa requires your dashboard link-name as account_no, set env var
-   TINYPESA_TARGET in Render. Leave unset to use the deposit ID. */
+/* ═══ DEPOSITS (TinyPesa STK push — api.tinypesa.com platform) ═══ */
 app.post('/wallet/deposit', auth, async (req, res) => {
   if (!WALLET_ENABLED) return res.status(403).json({ error: 'Wallet is not enabled yet' });
   const amount = Math.floor(+req.body.amount);
@@ -152,23 +153,23 @@ app.post('/wallet/deposit', auth, async (req, res) => {
   db.deposits.push(dep); save();
   const accountNo = process.env.TINYPESA_TARGET || dep.id;
   try {
-    const r = await fetch('https://tinypesa.com/api/v1/express/initialize', {
+    const url = new URL('https://api.tinypesa.com/api/v1/express/initialize/');
+    if (TINYPESA_USERNAME) url.searchParams.set('username', TINYPESA_USERNAME);
+    const r = await fetch(url, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', apikey: TINYPESA_KEY },
+      headers: { 'Content-Type': 'application/json', Apikey: TINYPESA_KEY },
       body: JSON.stringify({ amount, msisdn: dep.phone, account_no: accountNo })
     });
     const raw = await r.text();
     console.log('TINYPESA REPLY [' + r.status + ']:', raw.slice(0, 300));
     let data = {};
     try { data = JSON.parse(raw); } catch { data = { success: false }; }
-    if (!data.success) {
+    const ok = data.success === true || data.success === 'true';
+    if (!ok) {
       dep.status = 'failed'; dep.lastError = raw.slice(0, 200); save();
-      const html = raw.trim().toLowerCase().startsWith('<!doctype');
-      const hint = html ? ' — TinyPesa served a web page instead of the API. Usually means the API endpoint has changed or the account/key is not active.'
-                  : /kyc|verif|pend/i.test(raw) ? ' — KYC not approved yet.' : '';
-      return res.status(400).json({ error: 'TinyPesa rejected the push' + hint });
+      return res.status(400).json({ error: 'TinyPesa rejected the push. Says: ' + raw.slice(0, 140) });
     }
-    dep.tracking = data.tracking_id; save();
+    dep.tracking = data.tracking_id || data.request_id || ''; save();
     res.json({ depositId: dep.id, status: 'pending', message: 'Enter your M-Pesa PIN on the prompt sent to ' + dep.phone });
   } catch (e) {
     dep.status = 'failed'; save();
@@ -184,9 +185,10 @@ app.get('/wallet/deposit/:did', auth, (req, res) => {
 app.post('/tinypesa/webhook', (req, res) => {
   res.sendStatus(200);
   const b = req.body || {};
-  const receipt = b.MpesaReceiptNumber || b.mpesaReceiptNumber || '';
+  console.log('WEBHOOK BODY:', JSON.stringify(b).slice(0, 600));
+  const receipt = b.MpesaReceiptNumber || b.mpesaReceiptNumber || b.receipt || b.transaction_id || '';
   if (!receipt) return;
-  const phone = normPhone(b.PhoneNumber || b.phoneNumber || b.Msisdn || '');
+  const phone = normPhone(b.PhoneNumber || b.phoneNumber || b.Msisdn || b.msisdn || '');
   const amount = +b.Amount || +b.amount || 0;
   const acct = String(b.AccountNumber || b.account_no || b.accountNumber || b.Account_no || '');
   let dep = db.deposits.find(d => d.id === acct && d.status === 'pending');
