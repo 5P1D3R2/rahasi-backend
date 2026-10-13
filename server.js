@@ -111,7 +111,9 @@ app.post('/auth/delete', auth, (req, res) => {
   save(); res.json({ ok: true });
 });
 
-/* ═══ DEPOSITS (TinyPesa STK push) ═══ */
+/* ═══ DEPOSITS (TinyPesa STK push) ═══
+   If TinyPesa requires your dashboard target as account_no, set env var
+   TINYPESA_TARGET = Amspider in Render. Leave unset to use the deposit ID. */
 app.post('/wallet/deposit', auth, async (req, res) => {
   if (!WALLET_ENABLED) return res.status(403).json({ error: 'Wallet is not enabled yet' });
   const amount = Math.floor(+req.body.amount);
@@ -119,17 +121,29 @@ app.post('/wallet/deposit', auth, async (req, res) => {
   if (amount > 150000) return res.status(400).json({ error: 'Amount too large' });
   const dep = { id: newId(), phone: req.user.phone, amount, status: 'pending', t: Date.now() };
   db.deposits.push(dep); save();
+  const accountNo = process.env.TINYPESA_TARGET || dep.id;
   try {
     const r = await fetch('https://tinypesa.com/api/v1/express/initialize', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', apikey: TINYPESA_KEY },
-      body: JSON.stringify({ amount, msisdn: dep.phone, account_no: dep.id })
+      body: JSON.stringify({ amount, msisdn: dep.phone, account_no: accountNo })
     });
-    const data = await r.json();
-    if (!data.success) { dep.status = 'failed'; save(); return res.status(400).json({ error: 'Could not send the STK push — try again shortly' }); }
+    const raw = await r.text();
+    console.log('TINYPESA REPLY [' + r.status + ']:', raw.slice(0, 300));
+    let data = {};
+    try { data = JSON.parse(raw); } catch { data = { success: false }; }
+    if (!data.success) {
+      dep.status = 'failed'; dep.lastError = raw.slice(0, 200); save();
+      const hint = /kyc|verif|pend/i.test(raw) ? ' — TinyPesa KYC appears not approved yet' : '';
+      return res.status(400).json({ error: 'TinyPesa rejected the push' + hint + '. Says: ' + raw.slice(0, 120) });
+    }
     dep.tracking = data.tracking_id; save();
     res.json({ depositId: dep.id, status: 'pending', message: 'Enter your M-Pesa PIN on the prompt sent to ' + dep.phone });
-  } catch { dep.status = 'failed'; save(); res.status(500).json({ error: 'Payment service unreachable — try again' }); }
+  } catch (e) {
+    dep.status = 'failed'; save();
+    console.log('TINYPESA FETCH ERROR:', e.message);
+    res.status(500).json({ error: 'Payment service unreachable — try again' });
+  }
 });
 app.get('/wallet/deposit/:did', auth, (req, res) => {
   const dep = db.deposits.find(d => d.id === req.params.did && d.phone === req.user.phone);
@@ -234,6 +248,7 @@ app.get('/admin/overview', (req, res) => {
     verifiedUsers: db.users.filter(u => u.verified).length,
     pendingWithdrawals: db.withdrawals.filter(w => w.status === 'pending'),
     newRequests: db.requests.filter(r => r.status === 'new'),
+    pendingDeposits: db.deposits.filter(d => d.status === 'pending').length,
     revenue: +db.ledger.filter(l => l.kind === 'service').reduce((s, l) => s - l.delta, 0).toFixed(2),
     depositsToday: db.deposits.filter(d => d.status === 'paid' && Date.now() - d.t < 864e5).length
   });
