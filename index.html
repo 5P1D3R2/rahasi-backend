@@ -435,22 +435,22 @@ footer b{color:#C9D8F0}
 <script>
 'use strict';
 /* ═══════════════════════════════════════════════════════════
-   RAHISI SERVICES v6 — final frontend before backend
-   👉 EDIT CONFIG: API_URL + MPESA_NAME (+ og:url after deploy) 👈
+   RAHISI SERVICES v6 — CONFIG COMPLETE ✅
+   API_URL + MPESA_NAME are set. Only og:url above remains
+   optional (update after GitHub Pages gives you the link).
    ═══════════════════════════════════════════════════════════ */
 const CONFIG={
-  API_URL:"",                   // 👈 "https://rahasi-backend-xxxx.onrender.com"
+  API_URL:"https://rahasi-backend.onrender.com",
   WHATSAPP:"254102321713",
   WHATSAPP_GROUP:"https://chat.whatsapp.com/I64UOLjSxM5GW6LvRp0UHG?s=cl&p=a&mlu=4&ilr=4&iam=2",
   TELEGRAM:"https://t.me/+dUTnzFBM92NkNjA0",
-  MPESA_NAME:"EDIT_ME_MY_NAME", // 👈 name registered on your M-Pesa line
+  MPESA_NAME:"TITO KIPKIRUI",
   MPESA_NUMBER:"0102 321 713",
   MPESA_TILL:"None yet — pay to number",
   REFERRAL_DISCOUNT:50,
 };
 
 const SERVICES=[
-/* ⭐ MOST REQUESTED */
 {cat:'KRA',ico:'🧾',name:'KRA Tax Return Filing',eta:'Same day',price:300,d:'Annual nil or income returns filed right, every time. Deadline-proof.',pop:1,req:['Your KRA PIN','iTax email & phone','For income returns: your P9 or income details']},
 {cat:'KRA',ico:'🆔',name:'KRA PIN Registration',eta:'24 hrs',price:300,d:'First-time PIN for jobs, HELB, banking or SIM registration.',pop:1,req:['Your national ID','Personal phone & email','Parent/guardian ID (if under 18)']},
 {cat:'Health',ico:'🏥',name:'SHA / SHIF Registration',eta:'24 hrs',price:300,d:'Register you and your dependents on the Social Health Authority portal.',pop:1,req:['Your national ID','Phone number to register','Dependents\' details (if any)']},
@@ -465,7 +465,6 @@ const SERVICES=[
 {cat:'Education',ico:'📚',name:'KUCCPS Application / Revision',eta:'24 hrs',price:350,d:'Course choices entered with proper guidance on cutoff points.',pop:1,req:['Your index number','KCSE grade (or predicted)','Preferred courses & counties']},
 {cat:'Career',ico:'📄',name:'Professional CV Writing',eta:'48 hrs',price:600,d:'Clean, ATS-friendly CV + cover letter. Delivered as PDF + Word.',pop:1,req:['Your work & education history','Jobs you\'re targeting (links help)','Any current CV (even rough)']},
 {cat:'Business',ico:'🏪',name:'Business Name Registration',eta:'24 hrs',price:550,d:'Name search and registration on eCitizen for your hustle.',pop:1,req:['2–3 proposed names (we check availability)','Your ID & KRA PIN','County of business']},
-/* KRA */
 {cat:'KRA',ico:'🔎',name:'KRA PIN Retrieval (Lost PIN)',eta:'2 hrs',price:250,d:'PIN recovered and emailed to you in minutes.'},
 {cat:'KRA',ico:'🔑',name:'iTax Password / Email Reset',eta:'24 hrs',price:300,d:'Locked out of iTax? Access restored the honest way.'},
 {cat:'KRA',ico:'✏️',name:'KRA Details Amendment',eta:'24 hrs',price:350,d:'Update email, phone, address or bank details on iTax.'},
@@ -479,13 +478,11 @@ const SERVICES=[
 {cat:'KRA',ico:'📤',name:'Withholding / VAT Return Filing',eta:'24 hrs',price:350,d:'Business VAT and withholding returns filed on schedule.'},
 {cat:'KRA',ico:'👔',name:'Employment Return (P9) Filing',eta:'24 hrs',price:350,d:'Used your P9 from work? We file it correctly for you.'},
 {cat:'KRA',ico:'🏢',name:'PAYE / Employer Registration',eta:'24 hrs',price:400,d:'Register as an employer and file PAYE deductions properly.'},
-/* Health */
 {cat:'Health',ico:'👨‍👩‍👧',name:'SHA Add Dependents',eta:'24 hrs',price:250,d:'Add spouse or children to your SHIF cover properly.'},
 {cat:'Health',ico:'🔄',name:'SHA Details Update',eta:'24 hrs',price:250,d:'Fix names, phone numbers or employer details on SHA.'},
 {cat:'Health',ico:'💳',name:'SHA Contribution Payment Help',eta:'2 hrs',price:250,d:'Payments made right, with confirmation you can keep.'},
 {cat:'Health',ico:'🪪',name:'SHA Member Record Recovery',eta:'24 hrs',price:300,d:'Lost access to your SHA record? We recover it.'},
 {cat:'Health',ico:'👴',name:'Elder SHA Registration (we do it all)',eta:'24 hrs',price:350,d:'For parents and grandparents — handled end to end on their behalf.'},
-/* Education */
 {cat:'Education',ico:'📜',name:'HELB Compliance Certificate',eta:'24 hrs',price:350,d:'Needed for jobs and tenders — applied and followed up.'},
 {cat:'Education',ico:'🔍',name:'HELB Balance & Repayment Check',eta:'2 hrs',price:250,d:'Know exactly what you owe and your repayment options.'},
 {cat:'Education',ico:'📅',name:'HELB Repayment Plan Setup',eta:'24 hrs',price:300,d:'Arrange manageable repayments before penalties pile up.'},
@@ -504,7 +501,6 @@ const SERVICES=[
 {cat:'Education',ico:'🏅',name:'Scholarship Application Support',eta:'48 hrs',price:400,d:'Local and international scholarship forms, essays formatted.'},
 {cat:'Education',ico:'🔧',name:'NITA Trade Test Registration',eta:'24 hrs',price:350,d:'Grade test registration for artisans and fundis.'},
 {cat:'Education',ico:'📕',name:'University Project Formatting & Referencing',eta:'48 hrs',price:450,d:'Your own work formatted, referenced and print-ready. Guidance, not ghostwriting.'},
-/* Documents */
 {cat:'Documents',ico:'🗓️',name:'Birth Certificate Late Registration',eta:'48 hrs',price:450,d:'Older births registered properly, paperwork prepared.'},
 {cat:'Documents',ico:'🕊️',name:'Death Certificate Application',eta:'48 hrs',price:400,d:'Handled respectfully and promptly for families.'},
 {cat:'Documents',ico:'💍',name:'Marriage Certificate / AG Booking',eta:'48 hrs',price:450,d:'Registrar of marriages notice and booking arranged.'},
@@ -519,7 +515,6 @@ const SERVICES=[
 {cat:'Documents',ico:'📜',name:'Affidavit Typing & e-Filing Support',eta:'24 hrs',price:350,d:'Draft prepared and e-filing guided (advocate signing separate).'},
 {cat:'Documents',ico:'📝',name:'Simple Agreement / Contract Drafting',eta:'48 hrs',price:500,d:'Rentals, sales, services — clear plain-language drafts for an advocate to review.'},
 {cat:'Documents',ico:'🤵',name:'Passport-Size Photos (Digital)',eta:'Same day',price:250,d:'Send a selfie on WhatsApp, receive compliant digital passport photos.'},
-/* Travel & Visa */
 {cat:'Travel & Visa',ico:'🛂',name:'Visa Guidance (US / UK / Canada)',eta:'48 hrs',price:600,d:'Forms, booking and document checklists done with you.'},
 {cat:'Travel & Visa',ico:'🇪🇺',name:'Schengen / Europe Visa Help',eta:'48 hrs',price:650,d:'Application forms and appointment booking assistance.'},
 {cat:'Travel & Visa',ico:'🇰🇪',name:'Kenya ETA Application (visitors)',eta:'24 hrs',price:350,d:'Electronic travel authorisation for your guests, sorted.'},
@@ -529,7 +524,6 @@ const SERVICES=[
 {cat:'Travel & Visa',ico:'🔁',name:'Foreign Licence Exchange Support',eta:'48 hrs',price:450,d:'Converting a foreign driving licence — process handled.'},
 {cat:'Travel & Visa',ico:'✈️',name:'Flight Booking Assistance',eta:'24 hrs',price:400,d:'Best-value options found and booked with your approval.'},
 {cat:'Travel & Visa',ico:'🏨',name:'Hotel / Accommodation Booking Help',eta:'24 hrs',price:350,d:'Verified options within your budget, booked and confirmed.'},
-/* Vehicles */
 {cat:'Vehicles',ico:'🚙',name:'NTSA TIMS Account Setup',eta:'2 hrs',price:250,d:'TIMS account created and you shown how to use it.'},
 {cat:'Vehicles',ico:'💳',name:'Smart DL Application',eta:'24 hrs',price:350,d:'New smart driving licence application processed.'},
 {cat:'Vehicles',ico:'⏳',name:'Interim Driving Licence',eta:'24 hrs',price:300,d:'Interim DL issued so you can drive while waiting.'},
@@ -540,7 +534,6 @@ const SERVICES=[
 {cat:'Vehicles',ico:'🏁',name:'Driving Test Booking Support',eta:'24 hrs',price:300,d:'Test booked at a centre near you, reminders included.'},
 {cat:'Vehicles',ico:'🔐',name:'TIMS Password Reset',eta:'2 hrs',price:250,d:'Lost TIMS access? Restored in minutes.'},
 {cat:'Vehicles',ico:'🔧',name:'Motor Vehicle Inspection Booking',eta:'24 hrs',price:300,d:'Inspection booked at a centre convenient for you.'},
-/* Business */
 {cat:'Business',ico:'🏢',name:'Limited Company Registration',eta:'48 hrs',price:800,d:'Full ltd company registration with PIN and CR1-CR12 set.'},
 {cat:'Business',ico:'📄',name:'CR12 Certificate Application',eta:'24 hrs',price:450,d:'Company ownership record for tenders and banking.'},
 {cat:'Business',ico:'🔁',name:'CR29 – Change of Company Directors',eta:'48 hrs',price:500,d:'Director changes filed correctly with the Registrar.'},
@@ -556,7 +549,6 @@ const SERVICES=[
 {cat:'Business',ico:'🔥',name:'Fire Clearance Certificate',eta:'48 hrs',price:450,d:'Fire safety clearance for premises, inspection guidance.'},
 {cat:'Business',ico:'🧺',name:'Hawker / Market Stall Permit',eta:'24 hrs',price:300,d:'County permits for your daily hustle.'},
 {cat:'Business',ico:'🏠',name:'Boma Yangu / Housing Levy Registration',eta:'24 hrs',price:300,d:'Affordable housing portal account and contributions sorted.'},
-/* Land */
 {cat:'Land',ico:'🗺️',name:'Land / Title Search',eta:'48 hrs',price:450,d:'Official search on any title before you buy land.'},
 {cat:'Land',ico:'🧾',name:'Land Rent Clearance Certificate',eta:'48 hrs',price:450,d:'Clearance certificate applied for land transactions.'},
 {cat:'Land',ico:'🏙️',name:'Rates Clearance Certificate',eta:'48 hrs',price:450,d:'County rates cleared and certificate obtained.'},
@@ -564,7 +556,6 @@ const SERVICES=[
 {cat:'Land',ico:'🧭',name:'Registry Index Map Search',eta:'48 hrs',price:500,d:'Beacon and boundary map pulled for your parcel.'},
 {cat:'Land',ico:'🏢',name:'Company / Business Search (Registrar)',eta:'24 hrs',price:350,d:'Official company search report for due diligence.'},
 {cat:'Land',ico:'💵',name:'Land Rent Payment Assistance',eta:'24 hrs',price:300,d:'Annual land rent paid correctly, receipts kept for your records.'},
-/* Career */
 {cat:'Career',ico:'✉️',name:'Cover Letter / Application Letter',eta:'24 hrs',price:300,d:'Tailored to the exact job you are applying for.'},
 {cat:'Career',ico:'🔗',name:'LinkedIn Profile Optimization',eta:'48 hrs',price:500,d:'Profile rewritten so recruiters actually find you.'},
 {cat:'Career',ico:'📤',name:'Job Portal Application Help',eta:'24 hrs',price:300,d:'CV uploaded and applications submitted for you.'},
@@ -575,13 +566,11 @@ const SERVICES=[
 {cat:'Career',ico:'🖼️',name:'Professional CV Photo Retouch',eta:'24 hrs',price:250,d:'Phone photo turned into a proper CV headshot.'},
 {cat:'Career',ico:'📚',name:'Portfolio PDF Design',eta:'48 hrs',price:400,d:'Your work samples assembled into one sharp, shareable PDF.'},
 {cat:'Career',ico:'📨',name:'Job Follow-up Email Drafting',eta:'24 hrs',price:250,d:'A polite, professional follow-up that gets responses.'},
-/* CRB & Money */
 {cat:'CRB & Money',ico:'🏦',name:'CRB Clearance Certificate',eta:'48 hrs',price:500,d:'Clearance certificate for loans, jobs and tenders.'},
 {cat:'CRB & Money',ico:'📊',name:'CRB Credit Report Check',eta:'2 hrs',price:350,d:'See exactly what lenders see about you.'},
 {cat:'CRB & Money',ico:'👤',name:'Metropol / TransUnion Setup',eta:'24 hrs',price:300,d:'Accounts created and you shown how to monitor them.'},
 {cat:'CRB & Money',ico:'♿',name:'Tax Exemption Certificate (PWD)',eta:'48 hrs',price:500,d:'Persons-with-disability tax exemption applications handled.'},
-{cat:'CRB & Money',ico:' ✍️',name:'Debt Repayment Plan Letter',eta:'24 hrs',price:350,d:'A clear, honest proposal letter to your lender — often unlocks flexibility.'},
-/* Digital & Design */
+{cat:'CRB & Money',ico:'✍️',name:'Debt Repayment Plan Letter',eta:'24 hrs',price:350,d:'A clear, honest proposal letter to your lender — often unlocks flexibility.'},
 {cat:'Digital & Design',ico:'📧',name:'Email Account Setup (Gmail)',eta:'1 hr',price:250,d:'For elders and first-timers — set up with patience, in your language.'},
 {cat:'Digital & Design',ico:'💬',name:'WhatsApp Business Setup',eta:'24 hrs',price:350,d:'Catalogue, auto-replies and profile for your hustle.'},
 {cat:'Digital & Design',ico:'📣',name:'Facebook / Instagram Business Page',eta:'24 hrs',price:400,d:'Professional pages your customers can find.'},
@@ -602,7 +591,6 @@ const SERVICES=[
 {cat:'Digital & Design',ico:'📱',name:'Smartphone Training for Elders (1 hr)',eta:'By appointment',price:400,d:'Patient one-on-one: calls, WhatsApp, M-Pesa, safety.'},
 {cat:'Digital & Design',ico:'📝',name:'Online Form Filling (any portal)',eta:'2 hrs',price:250,d:'Any online form, filled accurately while you watch.'},
 {cat:'Digital & Design',ico:'🔐',name:'Own-Account Recovery Guidance',eta:'24 hrs',price:300,d:'Step-by-step guidance to recover YOUR OWN Gmail/Facebook via official channels.'},
-/* Legal & Courts */
 {cat:'Legal & Courts',ico:'⚖️',name:'Court e-Filing / Case Search Support',eta:'48 hrs',price:450,d:'Case status checks and e-filing navigation assistance.'},
 {cat:'Legal & Courts',ico:'🧑‍⚖️',name:'Small Claims Court Filing Guidance',eta:'48 hrs',price:500,d:'Recover debts under KSh 1M — claim prepared and filing guided.'},
 ];
@@ -615,7 +603,7 @@ const $=s=>document.querySelector(s);
 const API=(CONFIG.API_URL||'').replace(/\/+$/,'');
 const waLink=txt=>`https://wa.me/${CONFIG.WHATSAPP}?text=${encodeURIComponent(txt)}`;
 const escX=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const mpesaNamed=!CONFIG.MPESA_NAME.includes('EDIT_ME');
+const mpesaNamed=!CONFIG.MPESA_NAME.includes('PASTE_YOUR');
 const SVC_BY_NAME=Object.fromEntries(SERVICES.map(s=>[s.name,s]));
 
 let CFG={walletEnabled:false,minDeposit:50,minWithdraw:100};
@@ -994,7 +982,6 @@ document.querySelectorAll('#supM .tlist button').forEach(b=>b.onclick=()=>{windo
  $('#yr').textContent=new Date().getFullYear();
 
 (async function boot(){
-  /* referral via ?ref= link — auto-capture so shared links credit the referrer */
   try{
     const rp=new URLSearchParams(location.search).get('ref');
     if(rp&&rp.length>=2&&!localStorage.getItem('rahasi_ref')){
@@ -1008,7 +995,7 @@ document.querySelectorAll('#supM .tlist button').forEach(b=>b.onclick=()=>{windo
   if(!API){setTimeout(()=>toast('Owner: set API_URL in CONFIG to enable wallet, ratings & receipts.'),2000);return}
   try{
     CFG={...CFG,...await api('/config')};
-    if(CFG.banner)$('#strip').innerHTML=CFG.banner;   /* admin-controlled announcement */
+    if(CFG.banner)$('#strip').innerHTML=CFG.banner;
     renderHeader();await loadRatings();if(AUTH)refreshMe();
   }catch(e){toast('Backend waking up… (free Render tier sleeps ~50s)')}
 })();
