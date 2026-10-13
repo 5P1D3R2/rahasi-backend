@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rahisi Admin · Owner Panel</title>
+<meta name="robots" content="noindex">
+<style>
+:root{
+  --bg:#0A1120; --panel:#111C2E; --panel2:#17243C; --line:#1F2E4A; --line2:#2C3F63;
+  --text:#EAF1FB; --mut:#94A6C3; --dim:#5E7191;
+  --acc:#2EE58A; --gold:#FBBF24; --red:#FB7185;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:400 15px/1.55 system-ui,sans-serif;padding-bottom:40px}
+.mono{font-family:ui-monospace,Menlo,Consolas,monospace}
+header{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 14px;background:var(--panel);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
+.brand{font-weight:800;font-size:16px}
+.brand span{color:var(--acc)}
+main{max-width:680px;margin:0 auto;padding:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}
+.card h2{font-size:15px;margin:0 0 10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid4{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(min-width:560px){.grid4{grid-template-columns:repeat(4,1fr)}}
+.stat{background:var(--panel2);border:1px solid var(--line2);border-radius:12px;padding:12px;text-align:center}
+.stat b{display:block;font:800 20px ui-monospace,monospace;color:var(--acc)}
+.stat span{font:600 10px system-ui;color:var(--mut);letter-spacing:.04em}
+.stat.gd b{color:var(--gold)}
+.trow{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px;flex-wrap:wrap}
+.trow:last-child{border:0}
+.trow b{font-size:13px}
+.trow small{display:block;color:var(--dim);font-size:11px}
+.g{color:var(--acc);font-weight:700}.y{color:var(--gold);font-weight:700}.r{color:var(--red);font-weight:700}
+.empty{color:var(--dim);font-size:12.5px;padding:6px 0}
+button{font-family:system-ui;cursor:pointer}
+.btn{border:0;border-radius:9px;padding:9px 14px;font:800 12.5px system-ui;background:var(--acc);color:#04231A}
+.btn.ghost{background:var(--panel2);border:1px solid var(--line2);color:var(--text)}
+.btn.danger{background:none;border:1px solid var(--red);color:var(--red)}
+.btn.gold{background:var(--gold)}
+.btn.sm{padding:7px 11px;font-size:11.5px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.fld{margin-bottom:10px}
+.fld label{display:block;font:600 12px system-ui;color:var(--mut);margin-bottom:5px}
+.fld input,.fld select,.fld textarea{width:100%;font:600 15px system-ui;padding:11px;border:1px solid var(--line2);border-radius:10px;outline:0;background:var(--panel2);color:var(--text)}
+.fld input:focus,.fld textarea:focus{border-color:var(--acc)}
+.tabs{display:flex;gap:5px;padding:10px 0;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:none;padding:9px 14px;border-radius:999px;border:1px solid var(--line2);background:var(--panel);color:var(--mut);font:700 12.5px system-ui}
+.tabs button.on{background:var(--acc);border-color:var(--acc);color:#04231A}
+.note{font-size:11.5px;color:var(--dim);line-height:1.6;margin:8px 0 0}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#17243C;border:1px solid var(--line2);color:#fff;font:600 12.5px system-ui;padding:11px 16px;border-radius:10px;z-index:99;max-width:88vw;text-align:center}
+.spin{width:14px;height:14px;border:2px solid var(--line2);border-top-color:var(--acc);border-radius:50%;animation:rot .7s linear infinite;display:inline-block}
+@keyframes rot{to{transform:rotate(360deg)}}
+/* key gate */
+#gate{max-width:380px;margin:12vh auto;padding:0 16px}
+#gate .card{padding:22px}
+</style>
+</head>
+<body>
+
+<!-- KEY GATE -->
+<div id="gate">
+  <div class="card">
+    <h2>🔐 Rahisi Admin</h2>
+    <p style="font-size:13px;color:var(--mut);margin:0 0 12px">Owner access only. Enter your ADMIN_KEY (the one set in Render's environment variables). It stays on this device.</p>
+    <div class="fld"><input id="keyIn" type="password" placeholder="ADMIN_KEY" autocomplete="off"></div>
+    <div style="color:var(--red);font-size:12px;min-height:16px;margin:-4px 0 8px" id="gateErr"></div>
+    <button class="btn" style="width:100%;padding:13px" onclick="unlock()">Unlock panel</button>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app" hidden>
+<header>
+  <div class="brand">Rahisi<span>·</span>Admin</div>
+  <div style="display:flex;gap:8px">
+    <button class="btn ghost sm" onclick="loadAll()">↻ Refresh</button>
+    <button class="btn danger sm" onclick="logout()">Lock</button>
+  </div>
+</header>
+
+<main>
+  <div class="tabs" id="tabs">
+    <button data-t="dash" class="on">📊 Dashboard</button>
+    <button data-t="reqs">🧾 Requests</button>
+    <button data-t="wds">💸 Withdrawals</button>
+    <button data-t="promos">🎟️ Offers</button>
+    <button data-t="tools">🛠️ Tools</button>
+  </div>
+
+  <!-- DASHBOARD -->
+  <section id="s-dash">
+    <div class="grid4" id="statCards">
+      <div class="stat"><b id="stUsers">—</b><span>USERS</span></div>
+      <div class="stat"><b id="stVer">—</b><span>VERIFIED</span></div>
+      <div class="stat gd"><b id="stRev">—</b><span>REVENUE KSh</span></div>
+      <div class="stat"><b id="stDep">—</b><span>DEPOSITS 24H</span></div>
+    </div>
+    <div class="card" style="margin-top:12px">
+      <h2>⚡ Needs your attention</h2>
+      <div class="trow"><span>Pending withdrawals <small>pay within 24h — your promise</small></span><b id="atWd">—</b></div>
+      <div class="trow"><span>New service requests <small>confirm & start these</small></span><b id="atRq">—</b></div>
+      <div class="trow"><span>Wallet status <small>flips live when TinyPesa key is added</small></span><b id="atWal">—</b></div>
+    </div>
+    <div class="card">
+      <h2>📢 Site announcement banner</h2>
+      <div class="fld"><textarea id="bannerIn" rows="2" maxlength="200" placeholder="e.g. 🎉 OFFER: 20% off all KRA services this week — code KRA20"></textarea></div>
+      <button class="btn" id="bannerGo">Save banner</button>
+      <button class="btn ghost" id="bannerClr">Clear</button>
+      <p class="note">Shows in the gold strip at the top of your site. Every visitor sees it instantly — your offers board.</p>
+    </div>
+  </section>
+
+  <!-- REQUESTS -->
+  <section id="s-reqs" hidden>
+    <div class="card">
+      <h2>🧾 Service requests (latest 100)</h2>
+      <div id="reqList"><div class="empty">Loading…</div></div>
+      <p class="note">"Refund" credits the customer's wallet instantly and marks the receipt refunded. For customers who paid by direct M-Pesa (WhatsApp flow), refund manually on M-Pesa — those aren't in this list.</p>
+    </div>
+  </section>
+
+  <!-- WITHDRAWALS -->
+  <section id="s-wds" hidden>
+    <div class="card">
+      <h2>💸 Pending withdrawals</h2>
+      <div id="wdList"><div class="empty">Loading…</div></div>
+      <p class="note">Send the M-Pesa to the number shown from YOUR wallet, then tap "Mark paid". Always honor within 24 hours — this is the promise that makes the wallet trustworthy.</p>
+    </div>
+  </section>
+
+  <!-- PROMOS -->
+  <section id="s-promos" hidden>
+    <div class="card">
+      <h2>🎟️ Create an offer code</h2>
+      <div class="grid2">
+        <div class="fld"><label>Code (letters/numbers)</label><input id="pCode" placeholder="KRA20" style="text-transform:uppercase"></div>
+        <div class="fld"><label>Type</label><select id="pType"><option value="percent">% off</option><option value="flat">KSh off</option></select></div>
+        <div class="fld"><label>Value</label><input id="pValue" type="number" placeholder="20"></div>
+        <div class="fld"><label>Max uses</label><input id="pMax" type="number" value="50"></div>
+      </div>
+      <div class="fld"><label>Valid for (days)</label><input id="pDays" type="number" value="14"></div>
+      <button class="btn" id="pGo">Create offer</button>
+      <p class="note">Customers enter the code when paying from wallet. Pair it with a banner announcement for real impact.</p>
+    </div>
+    <div class="card">
+      <h2>Active & past offers</h2>
+      <div id="promoList"><div class="empty">Loading…</div></div>
+    </div>
+  </section>
+
+  <!-- TOOLS -->
+  <section id="s-tools" hidden>
+    <div class="card">
+      <h2>↩️ Refund by receipt ID</h2>
+      <div class="fld"><input id="refId" placeholder="RQ-XXXXXX" style="text-transform:uppercase"></div>
+      <button class="btn danger" id="refGo">Refund to wallet</button>
+      <p class="note">Instantly credits the customer's wallet and marks the receipt "refunded". Use for any task you can't complete.</p>
+    </div>
+    <div class="card">
+      <h2>💾 Backup everything</h2>
+      <button class="btn gold" id="expGo">⬇ Download full backup</button>
+      <p class="note">Downloads db.json — users, balances, ledger, everything. <b>Do this every week.</b> Free Render redeploys can wipe the server's data file; this download is your insurance.</p>
+    </div>
+    <div class="card">
+      <h2>🔑 Key</h2>
+      <p class="note">Your ADMIN_KEY is stored on this device only. "Lock" forgets it. Never type it on someone else's phone.</p>
+    </div>
+  </section>
+</main>
+</div>
+
+<script>
+'use strict';
+const API='https://rahasi-backend.onrender.com';
+let KEY=localStorage.getItem('rahasi_admin_key')||'';
+
+const $=s=>document.querySelector(s);
+function toast(m){const t=document.createElement('div');t.className='toast';t.textContent=m;document.body.appendChild(t);setTimeout(()=>t.remove(),3500)}
+const fmtT=t=>new Date(t).toLocaleDateString()+' '+new Date(t).toTimeString().slice(0,5);
+
+async function call(path,opts={}){
+  const r=await fetch(API+path,{...opts,headers:{'Content-Type':'application/json','x-admin-key':KEY,...(opts.headers||{})}});
+  const d=await r.json().catch(()=>({}));
+  if(!r.ok){if(r.status===401){logout();throw new Error('Bad admin key — locked out')}throw new Error(d.error||'Request failed')}
+  return d;
+}
+function logout(){localStorage.removeItem('rahasi_admin_key');KEY='';$('#app').hidden=true;$('#gate').style.display='block'}
+
+async function unlock(){
+  KEY=$('#keyIn').value.trim();
+  if(!KEY)return $('#gateErr').textContent='Enter your key';
+  $('#gateErr').textContent='';
+  try{
+    await call('/admin/overview');
+    localStorage.setItem('rahasi_admin_key',KEY);
+    $('#gate').style.display='none';$('#app').hidden=false;
+    loadAll();
+  }catch(e){$('#gateErr').textContent=e.message}
+}
+ $('#keyIn').addEventListener('keydown',e=>{if(e.key==='Enter')unlock()});
+
+/* tabs */
+document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#tabs button').forEach(x=>x.classList.toggle('on',x===b));
+  ['dash','reqs','wds','promos','tools'].forEach(t=>$('#s-'+t).hidden=t!==b.dataset.t);
+});
+
+async function loadAll(){
+  try{
+    const o=await call('/admin/overview');
+    $('#stUsers').textContent=o.users;
+    $('#stVer').textContent=o.verifiedUsers;
+    $('#stRev').textContent=o.revenue.toFixed(0);
+    $('#stDep').textContent=o.depositsToday;
+    $('#atWd').textContent=o.pendingWithdrawals.length;
+    $('#atWd').className=o.pendingWithdrawals.length?'r':'g';
+    $('#atRq').textContent=o.newRequests.length;
+    $('#atRq').className=o.newRequests.length?'y':'g';
+    $('#atWal').textContent=o.walletEnabled?'LIVE':'waiting for TinyPesa key';
+    $('#atWal').className=o.walletEnabled?'g':'y';
+    renderWds(o.pendingWithdrawals);
+  }catch(e){toast(e.message)}
+  loadReqs();loadPromos();
+}
+
+/* requests */
+async function loadReqs(){
+  const el=$('#reqList');
+  try{
+    const rs=await call('/admin/requests');
+    el.innerHTML=rs.length?rs.map(r=>`
+      <div class="trow">
+        <span style="flex:1;min-width:150px"><b>${r.name}</b> · KSh ${r.final||r.price}${r.promo?` <span class="y">[${r.promo}]</span>`:''}
+        <small class="mono">${r.id} · ${fmtT(r.t)}</small>
+        <small>${r.phone}</small></span>
+        <span class="${r.status==='done'?'g':r.status==='refunded'?'r':'y'}">${r.status}</span>
+        <span style="display:flex;gap:5px">
+          ${r.status==='new'?`<button class="btn sm ghost" onclick="setStatus('${r.id}','in progress')">Start</button>`:''}
+          ${r.status!=='done'&&r.status!=='refunded'?`<button class="btn sm" onclick="setStatus('${r.id}','done')">Done</button>`:''}
+          ${r.status!=='refunded'&&r.status!=='done'?`<button class="btn sm danger" onclick="refund('${r.id}')">Refund</button>`:''}
+        </span>
+      </div>`).join(''):'<div class="empty">No requests yet — they appear here when customers pay from their wallet.</div>';
+  }catch(e){el.innerHTML='<div class="empty">'+e.message+'</div>'}
+}
+async function setStatus(rid,status){
+  try{await call('/admin/request/'+rid+'/status',{method:'POST',body:JSON.stringify({status})});toast(rid+' → '+status);loadReqs();loadAll()}
+  catch(e){toast(e.message)}
+}
+async function refund(rid){
+  if(!confirm('Refund '+rid+' to the customer wallet?'))return;
+  try{const d=await call('/admin/refund',{method:'POST',body:JSON.stringify({rid})});toast(d.message);loadReqs();loadAll()}
+  catch(e){toast(e.message)}
+}
+
+/* withdrawals */
+function renderWds(ws){
+  const el=$('#wdList');
+  el.innerHTML=ws.length?ws.map(w=>`
+    <div class="trow">
+      <span style="flex:1"><b>KSh ${w.amount}</b> → <span class="mono">${w.phone}</span><small class="mono">${w.id} · ${fmtT(w.t)}</small></span>
+      <button class="btn sm gold" onclick="markPaid('${w.id}','${w.phone}',${w.amount})">Mark paid</button>
+    </div>`).join(''):'<div class="empty">None pending 👌</div>';
+}
+async function markPaid(wid,phone,amount){
+  if(!confirm('Confirm you have SENT KSh '+amount+' to '+phone+' via M-Pesa?\n\nOnly mark paid AFTER sending.'))return;
+  try{await call('/admin/withdrawal/'+wid+'/paid',{method:'POST'});toast('Marked paid ✅');loadAll()}
+  catch(e){toast(e.message)}
+}
+
+/* promos */
+async function loadPromos(){
+  const el=$('#promoList');
+  try{
+    const ps=await call('/admin/promos');
+    el.innerHTML=ps.length?ps.map(p=>`
+      <div class="trow">
+        <span style="flex:1"><b class="mono">${p.code}</b> — ${p.type==='percent'?p.value+'% off':'KSh '+p.value+' off'}
+        <small>${p.uses}/${p.maxUses} used · expires ${new Date(p.expires).toLocaleDateString()}</small></span>
+        ${p.active?'<span class="g">active</span> <button class="btn sm danger" onclick="disablePromo(\''+p.code+'\')">Disable</button>':'<span class="r">disabled</span>'}
+      </div>`).join(''):'<div class="empty">No offers yet — create your first one above.</div>';
+  }catch(e){el.innerHTML='<div class="empty">'+e.message+'</div>'}
+}
+ $('#pGo').onclick=async()=>{
+  try{
+    const pr=await call('/admin/promo',{method:'POST',body:JSON.stringify({
+      code:$('#pCode').value,type:$('#pType').value,value:+$('#pValue').value,
+      maxUses:+$('#pMax').value,days:+$('#pDays').value})});
+    toast('Offer '+pr.code+' is live 🎟️');
+    $('#pCode').value='';$('#pValue').value='';loadPromos();
+  }catch(e){toast(e.message)}
+};
+async function disablePromo(code){
+  try{await call('/admin/promo/'+code+'/disable',{method:'POST'});toast(code+' disabled');loadPromos()}
+  catch(e){toast(e.message)}
+}
+
+/* banner */
+ $('#bannerGo').onclick=async()=>{
+  try{await call('/admin/banner',{method:'POST',body:JSON.stringify({text:$('#bannerIn').value})});toast('Banner saved — live on the site now 📢')}
+  catch(e){toast(e.message)}
+};
+ $('#bannerClr').onclick=async()=>{
+  try{await call('/admin/banner',{method:'POST',body:JSON.stringify({text:''})});$('#bannerIn').value='';toast('Banner cleared')}
+  catch(e){toast(e.message)}
+};
+
+/* export */
+ $('#expGo').onclick=async()=>{
+  try{
+    const r=await fetch(API+'/admin/export',{headers:{'x-admin-key':KEY}});
+    if(!r.ok)throw new Error('Export failed');
+    const blob=await r.blob();
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download='rahasi-backup-'+new Date().toISOString().slice(0,10)+'.json';
+    a.click();
+    toast('Backup downloaded 💾');
+  }catch(e){toast(e.message)}
+};
+
+/* boot: auto-unlock if key remembered */
+if(KEY){$('#keyIn').value=KEY;unlock();}
+</script>
+</body>
+</html>
