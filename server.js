@@ -7,10 +7,10 @@ const path = require('path');
 
 const app = express();
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '5mb' }));
 app.use(express.urlencoded({ extended: false }));
 
-/* ── JSON file database. Back up via /admin/export weekly. ── */
+/* ── JSON file database. Back up weekly; restore after redeploys. ── */
 const DB_FILE = path.join(__dirname, 'db.json');
 let db;
 try { db = JSON.parse(fs.readFileSync(DB_FILE, 'utf8')); }
@@ -30,6 +30,7 @@ const TINYPESA_KEY = process.env.TINYPESA_API_KEY || '';
 const ADMIN_KEY = process.env.ADMIN_KEY || '';
 const WALLET_ENABLED = !!(TINYPESA_KEY && ADMIN_KEY);
 const MIN_DEPOSIT = 50, MIN_WITHDRAW = 100, MIN_PRICE = 250, MAX_PRICE = 20000;
+const SESSION_DAYS = 180;
 
 /* ── helpers ── */
 const normPhone = v => {
@@ -43,7 +44,12 @@ const userByPhone = p => db.users.find(u => u.phone === p);
 const pubUser = u => ({ name: u.name, phone: u.phone, balance: u.balance, verified: !!u.verified, created: u.created });
 function newSession(phone) {
   const token = crypto.randomBytes(24).toString('hex');
-  db.sessions.push({ token, phone, exp: Date.now() + 30 * 864e5 });
+  db.sessions.push({ token, phone, exp: Date.now() + SESSION_DAYS * 864e5 });
+  const mine = db.sessions.filter(s => s.phone === phone);
+  if (mine.length > 5) {
+    const kill = new Set(mine.sort((a, b) => a.exp - b.exp).slice(0, mine.length - 5).map(s => s.token));
+    db.sessions = db.sessions.filter(s => !kill.has(s.token));
+  }
   return token;
 }
 function addLedger(phone, delta, kind, ref) {
@@ -339,6 +345,27 @@ app.post('/admin/deposit/manual', (req, res) => {
   save();
   console.log('MANUAL DEPOSIT:', phone, amount, ref);
   res.json({ ok: true, message: 'Credited KSh ' + amount + ' to ' + phone });
+});
+
+/* ═══ ADMIN — backup & restore ═══ */
+app.get('/admin/backup', (req, res) => {
+  if (!isAdmin(req)) return res.status(401).json({ error: 'bad key' });
+  res.setHeader('Content-Disposition', 'attachment; filename="rahasi-backup.json"');
+  res.json(db);
+});
+app.post('/admin/restore', (req, res) => {
+  if (!isAdmin(req)) return res.status(401).json({ error: 'bad key' });
+  const incoming = req.body;
+  if (!incoming || !Array.isArray(incoming.users) || !Array.isArray(incoming.ledger)) {
+    return res.status(400).json({ error: 'That file is not a valid Rahisi backup' });
+  }
+  const keys = ['users', 'sessions', 'ledger', 'deposits', 'withdrawals', 'requests', 'ratings', 'promos'];
+  for (const k of keys) if (Array.isArray(incoming[k])) db[k] = incoming[k];
+  if (incoming.settings && typeof incoming.settings === 'object') db.settings = incoming.settings;
+  save();
+  console.log('DATABASE RESTORED from backup:', incoming.users.length, 'users');
+  res.json({ ok: true, message: 'Restored: ' + incoming.users.length + ' users, ' +
+    (incoming.requests || []).length + ' requests, ' + (incoming.ledger || []).length + ' ledger entries' });
 });
 app.get('/admin/export', (req, res) => {
   if (!isAdmin(req)) return res.status(401).json({ error: 'bad key' });
